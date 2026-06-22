@@ -1,5 +1,70 @@
 # Welcome to the new nnU-Net!
 
+## Custom Docker Usage (nnunet-rain)
+This repository contains a customized Docker setup for training Brain Metastases models. 
+The expected dataset structure resides in `nnUnet_dataset/`. For detailed information on how to format new datasets and use the included Java conversion scripts (`reformat.java` and `reformat_clean.java`), please see the **[Dataset Preparation Guide](nnUnet_dataset/README.md)**.
+
+### 1. Build the Docker Image
+```bash
+docker build -t nnunet-rain .
+```
+
+### 2. Run Preprocessing or Training
+You must mount your local dataset to `/workspace/nnunet_data` inside the container. 
+*(Adjust the host path `/path/to/your/nnUnet_dataset` to point to your physical dataset folder, e.g. `nnUnet_dataset` in this repo).*
+
+**To run an interactive shell:**
+```bash
+docker run --gpus all -it --rm \
+  -v /path/to/your/nnUnet_dataset:/workspace/nnunet_data \
+  nnunet-rain bash
+```
+*(Once inside the container's shell, you can directly run native nnU-Net commands without Docker prefixes)*
+- **Preprocessing inside shell:** `nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity`
+- **Training inside shell:** `nnUNetv2_train 1 3d_fullres 0`
+
+**To run preprocessing directly:**
+```bash
+docker run --gpus all -it --rm \
+  -v /path/to/your/nnUnet_dataset:/workspace/nnunet_data \
+  nnunet-rain "nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity"
+```
+
+**To run training directly (e.g. Dataset 1, 3d_fullres, Fold 0):**
+```bash
+docker run --gpus all -it --rm \
+  -v /path/to/your/nnUnet_dataset:/workspace/nnunet_data \
+  nnunet-rain "nnUNetv2_train 1 3d_fullres 0"
+```
+
+### 3. Understanding the nnU-Net Pipeline
+When you execute the commands above, nnU-Net handles the entire pipeline autonomously:
+
+1. **Dataset Formatting:** Data inside `nnUnet_raw/` must follow strict formatting (`imagesTr`, `labelsTr`, `dataset.json`). Use the provided `reformat.java` scripts to arrange raw data.
+   ```bash
+   cd nnUnet_dataset/nnUnet_raw/Dataset001_UCSFbrainmets
+   javac reformat.java
+   java reformat /path/to/source /path/to/target
+   ```
+2. **Planning and Preprocessing (`nnUNetv2_plan_and_preprocess`):** 
+   - **Fingerprint Extraction:** Scans NIfTI files to measure image dimensions, voxel spacings, intensities, and class ratios.
+   - **Experiment Planning:** Based on the fingerprint, it calculates the maximum patch size for GPU memory, determines batch size, decides network depth, and decides if a cascade (low-res then high-res) is needed.
+   - **Preprocessing:** Crops images to non-zero regions, standardizes voxel spacings via resampling, and normalizes intensities (Z-scoring for MRI). The arrays are saved to `nnUnet_preprocessed/`.
+   ```bash
+   nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity
+   ```
+3. **Training (`nnUNetv2_train`):** Loads the efficient preprocessed arrays. It automatically trains for 1000 epochs and performs 5-fold cross-validation.
+   ```bash
+   nnUNetv2_train 1 3d_fullres 0
+   ```
+   *(Where `1` is the dataset ID, `3d_fullres` is the configuration, and `0` is the fold)*
+4. **Inference (`nnUNetv2_predict`):** Automatically applies the learned preprocessing rules to new data, makes predictions, and resamples the segmentation masks back to their original physical space.
+   ```bash
+   nnUNetv2_predict -i /workspace/input_folder -o /workspace/output_folder -d 1 -c 3d_fullres -f 0
+   ```
+
+---
+
 Click [here](https://github.com/MIC-DKFZ/nnUNet/tree/nnunetv1) if you were looking for the old one instead.
 
 Coming from V1? Check out the [TLDR Migration Guide](documentation/tldr_migration_guide_from_v1.md). Reading the rest of the documentation is still strongly recommended ;-)
