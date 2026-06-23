@@ -34,5 +34,13 @@ WORKDIR /workspace
 # docker run --gpus all -it --rm \
 #   -v /path/to/nnunet_data:/workspace/nnunet_data \
 #   nnunet-rain nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity
+
+# Install GCC for torch.compile (JIT compilation of neural net graphs)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    build-essential \
+    gcc \
+    g++ \
+    && rm -rf /var/lib/apt/lists/*
+
 ENTRYPOINT ["/bin/bash", "-lc"]
 CMD ["python -c \"import torch; print('CUDA:', torch.cuda.is_available(), 'GPUs:', torch.cuda.device_count())\""]
