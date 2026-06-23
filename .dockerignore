@@ -1,0 +1,6 @@
+nnUnet_dataset/
+training_plan/
+status/
+*.npy
+*.npz
+.git/
