@@ -178,8 +178,8 @@
             "preprocessor_name": "DefaultPreprocessor",
             "batch_size": 4,
             "patch_size": [
-                96,
-                224,
+                160,
+                192,
                 160
             ],
             "median_image_size_in_voxels": [
