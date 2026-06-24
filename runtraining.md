@@ -62,7 +62,24 @@ docker run --gpus all -it --rm \
 ```
 
 #### Step 2: Run Custom Training
-Train the model using both the custom plans and the custom trainer class (`nnUNetTrainerMets`) on multi-GPU:
+Since the container's python environment is installed in editable mode from the code directory `/opt/nnunet`, you need to either **mount your code directory** or **rebuild the Docker image** so the container can find the new custom `nnUNetTrainerMets` class.
+
+##### Method A: Mount the Code Directory (Recommended for Live Hyperparameter Tuning)
+By adding `-v .../train/nnUNet_rain:/opt/nnunet`, any updates you make to the trainer python files on the host are immediately reflected inside the running container without needing a rebuild:
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
+  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
+```
+*(If you are running on 2 GPUs, adjust `CUDA_VISIBLE_DEVICES=1,2` and `-num_gpus 2` accordingly)*
+
+##### Method B: Rebuild the Docker Image
+Alternatively, rebuild the Docker image to bake the new trainer class into the container's environment (must be run inside the `train/nnUNet_rain` directory containing the `Dockerfile`):
+```bash
+docker build -t nnunet-rain .
+```
+After building, you can run training without mounting the code directory:
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
   -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
@@ -96,6 +113,7 @@ If you trained using the custom plans and custom trainer:
 ```bash
 docker run --gpus all -it --rm \
   -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   -v /path/to/server/input_scans:/workspace/input \
   -v /path/to/server/output_predictions:/workspace/output \
   nnunet-rain "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 1 -c 3d_fullres -f 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets"
