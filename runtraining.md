@@ -86,7 +86,38 @@ CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
 ```
 
-## 4. Inference (Prediction)
+## 4. Weights & Biases (W&B) Logging
+
+nnU-Net has a built-in logger that can stream metrics (loss, validation Dice, learning rates, system usage) directly to [wandb.ai](https://wandb.ai) in real time.
+
+### Step 1: Set up the `.env` configuration file
+To keep API keys and logging variables secure and out of version control, copy the template `.env.example` file to `.env` on the host:
+```bash
+cp .env.example .env
+```
+Edit the `.env` file to insert your W&B API key and preferred project name:
+```env
+nnUNet_wandb_enabled=True
+nnUNet_wandb_project=brain-mets-segmentation
+nnUNet_wandb_mode=online
+WANDB_API_KEY=your_actual_wandb_api_key_here
+```
+
+### Step 2: Run training with W&B configuration
+To pass these settings to the Docker container, use Docker's `--env-file` parameter. 
+
+For example, when running custom training with the code mounted (Method A):
+```bash
+CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
+  --env-file .env \
+  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
+```
+
+---
+
+## 5. Inference (Prediction)
 After training is complete, you can generate predictions on new, unseen data. You will need to map an additional input directory containing the new raw scans, and an output directory for the predictions.
 
 ### Standard Full-Resolution Inference
