@@ -1,5 +1,5 @@
 # configs/exp_test.yaml
-experiment_name: "exp_test"
+experiment_name: "exp_test_2"
 optimizer: "AdamW"
 initial_lr: 0.0002
 weight_decay: 0.0004
