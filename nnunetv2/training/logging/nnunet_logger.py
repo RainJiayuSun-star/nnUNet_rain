@@ -44,7 +44,15 @@ class MetaLogger(object):
         self.loggers = []
         self.local_logger = LocalLogger(verbose)
         if self._is_logger_enabled("nnUNet_wandb_enabled"):
-            self.loggers.append(WandbLogger(output_folder, resume))
+            # Only initialize WandbLogger on Rank 0 in multi-GPU training to prevent duplicate runs
+            try:
+                import torch.distributed as dist
+                if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
+                    pass
+                else:
+                    self.loggers.append(WandbLogger(output_folder, resume))
+            except Exception:
+                self.loggers.append(WandbLogger(output_folder, resume))
 
     def update_config(self, config: dict):
         """Add a new or update an existing experiment configuration to the logger.
