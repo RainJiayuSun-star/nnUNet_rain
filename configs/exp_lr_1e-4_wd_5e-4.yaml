@@ -1,0 +1,8 @@
+# configs/exp_lr_1e-4_wd_5e-4.yaml
+experiment_name: "exp_lr_1e-4_wd_5e-4"
+optimizer: "AdamW"
+initial_lr: 0.0001
+weight_decay: 0.0005
+num_epochs: 300
+dropout_p: 0.3
+region_weights: [1.0, 1.0, 2.0]

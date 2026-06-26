@@ -1,0 +1,8 @@
+# configs/exp_test.yaml
+experiment_name: "exp_test"
+optimizer: "AdamW"
+initial_lr: 0.0002
+weight_decay: 0.0004
+num_epochs: 2
+dropout_p: 0.3
+region_weights: [1.0, 1.0, 2.0]
