@@ -1,0 +1,3394 @@
+{
+    "foreground_mean": {
+        "Dice": 0.3587451384465666,
+        "FN": 5585.530465949821,
+        "FP": 3911.487455197133,
+        "IoU": 0.2865525344094016,
+        "TN": 10358780.1218638,
+        "TP": 4633.655913978495,
+        "n_pred": 8545.143369175628,
+        "n_ref": 10219.186379928315
+    },
+    "mean": {
+        "(1, 2, 3)": {
+            "Dice": 0.6159222047580433,
+            "FN": 7652.311827956989,
+            "FP": 4936.5053763440865,
+            "IoU": 0.4889411835940513,
+            "TN": 10351536.129032258,
+            "TP": 8785.849462365592,
+            "n_pred": 13722.354838709678,
+            "n_ref": 16438.16129032258
+        },
+        "(2, 3)": {
+            "Dice": 0.22235251408286677,
+            "FN": 7781.322580645161,
+            "FP": 5626.537634408603,
+            "IoU": 0.17781565400000757,
+            "TN": 10355233.322580645,
+            "TP": 4269.612903225807,
+            "n_pred": 9896.150537634408,
+            "n_ref": 12050.935483870968
+        },
+        "(3,)": {
+            "Dice": 0.23796069649878965,
+            "FN": 1322.9569892473119,
+            "FP": 1171.4193548387098,
+            "IoU": 0.192900765634146,
+            "TN": 10369570.913978495,
+            "TP": 845.505376344086,
+            "n_pred": 2016.9247311827958,
+            "n_ref": 2168.462365591398
+        }
+    },
+    "metric_per_case": [
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6533505154639175,
+                    "FN": 147,
+                    "FP": 391,
+                    "IoU": 0.4851674641148325,
+                    "TN": 64486379,
+                    "TP": 507,
+                    "n_pred": 898,
+                    "n_ref": 654
+                },
+                "(2, 3)": {
+                    "Dice": 0.6554185593770279,
+                    "FN": 149,
+                    "FP": 382,
+                    "IoU": 0.4874517374517375,
+                    "TN": 64486388,
+                    "TP": 505,
+                    "n_pred": 887,
+                    "n_ref": 654
+                },
+                "(3,)": {
+                    "Dice": 0.7283333333333334,
+                    "FN": 203,
+                    "FP": 123,
+                    "IoU": 0.5727391874180865,
+                    "TN": 64486661,
+                    "TP": 437,
+                    "n_pred": 560,
+                    "n_ref": 640
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_010.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_010.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7216494845360825,
+                    "FN": 52,
+                    "FP": 2,
+                    "IoU": 0.5645161290322581,
+                    "TN": 7208836,
+                    "TP": 70,
+                    "n_pred": 72,
+                    "n_ref": 122
+                },
+                "(2, 3)": {
+                    "Dice": 0.7216494845360825,
+                    "FN": 52,
+                    "FP": 2,
+                    "IoU": 0.5645161290322581,
+                    "TN": 7208836,
+                    "TP": 70,
+                    "n_pred": 72,
+                    "n_ref": 122
+                },
+                "(3,)": {
+                    "Dice": 0.7580645161290323,
+                    "FN": 28,
+                    "FP": 2,
+                    "IoU": 0.6103896103896104,
+                    "TN": 7208883,
+                    "TP": 47,
+                    "n_pred": 49,
+                    "n_ref": 75
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_011.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_011.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6564200217627857,
+                    "FN": 285,
+                    "FP": 4767,
+                    "IoU": 0.48856043733549304,
+                    "TN": 8247658,
+                    "TP": 4826,
+                    "n_pred": 9593,
+                    "n_ref": 5111
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 9536,
+                    "IoU": 0.0,
+                    "TN": 8248000,
+                    "TP": 0,
+                    "n_pred": 9536,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4626,
+                    "IoU": 0.0,
+                    "TN": 8252910,
+                    "TP": 0,
+                    "n_pred": 4626,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_017.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_017.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8909639823070983,
+                    "FN": 703,
+                    "FP": 850,
+                    "IoU": 0.8033679412509496,
+                    "TN": 14392102,
+                    "TP": 6345,
+                    "n_pred": 7195,
+                    "n_ref": 7048
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 752,
+                    "IoU": 0.0,
+                    "TN": 14399248,
+                    "TP": 0,
+                    "n_pred": 752,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 66,
+                    "IoU": 0.0,
+                    "TN": 14399934,
+                    "TP": 0,
+                    "n_pred": 66,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_019.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_019.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.909239872553482,
+                    "FN": 2469,
+                    "FP": 522,
+                    "IoU": 0.8335837088966783,
+                    "TN": 14382027,
+                    "TP": 14982,
+                    "n_pred": 15504,
+                    "n_ref": 17451
+                },
+                "(2, 3)": {
+                    "Dice": 0.9073173714949698,
+                    "FN": 2485,
+                    "FP": 546,
+                    "IoU": 0.8303576425812951,
+                    "TN": 14382133,
+                    "TP": 14836,
+                    "n_pred": 15382,
+                    "n_ref": 17321
+                },
+                "(3,)": {
+                    "Dice": 0.9304507444421782,
+                    "FN": 267,
+                    "FP": 74,
+                    "IoU": 0.8699466056445462,
+                    "TN": 14397378,
+                    "TP": 2281,
+                    "n_pred": 2355,
+                    "n_ref": 2548
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_020.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_020.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6947368421052632,
+                    "FN": 70,
+                    "FP": 17,
+                    "IoU": 0.532258064516129,
+                    "TN": 6422342,
+                    "TP": 99,
+                    "n_pred": 116,
+                    "n_ref": 169
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 113,
+                    "IoU": 0.0,
+                    "TN": 6422415,
+                    "TP": 0,
+                    "n_pred": 113,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 81,
+                    "IoU": 0.0,
+                    "TN": 6422447,
+                    "TP": 0,
+                    "n_pred": 81,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_027.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_027.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.4904447222718343,
+                    "FN": 2790,
+                    "FP": 63,
+                    "IoU": 0.32489351632749647,
+                    "TN": 6418302,
+                    "TP": 1373,
+                    "n_pred": 1436,
+                    "n_ref": 4163
+                },
+                "(2, 3)": {
+                    "Dice": 0.1716794731064764,
+                    "FN": 3772,
+                    "FP": 1,
+                    "IoU": 0.09390009606147935,
+                    "TN": 6418364,
+                    "TP": 391,
+                    "n_pred": 392,
+                    "n_ref": 4163
+                },
+                "(3,)": {
+                    "Dice": 0.0051513200257566,
+                    "FN": 1545,
+                    "FP": 0,
+                    "IoU": 0.0025823111684958036,
+                    "TN": 6420979,
+                    "TP": 4,
+                    "n_pred": 4,
+                    "n_ref": 1549
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_028.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_028.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.2012798571322271,
+                    "FN": 139,
+                    "FP": 21329,
+                    "IoU": 0.11190170851776776,
+                    "TN": 14375827,
+                    "TP": 2705,
+                    "n_pred": 24034,
+                    "n_ref": 2844
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 23836,
+                    "IoU": 0.0,
+                    "TN": 14376164,
+                    "TP": 0,
+                    "n_pred": 23836,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2636,
+                    "IoU": 0.0,
+                    "TN": 14397364,
+                    "TP": 0,
+                    "n_pred": 2636,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_031.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_031.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.46075494307968845,
+                    "FN": 1544,
+                    "FP": 256,
+                    "IoU": 0.2993382639159206,
+                    "TN": 6813175,
+                    "TP": 769,
+                    "n_pred": 1025,
+                    "n_ref": 2313
+                },
+                "(2, 3)": {
+                    "Dice": 0.4403053435114504,
+                    "FN": 1558,
+                    "FP": 275,
+                    "IoU": 0.2823022709475333,
+                    "TN": 6813190,
+                    "TP": 721,
+                    "n_pred": 996,
+                    "n_ref": 2279
+                },
+                "(3,)": {
+                    "Dice": 0.7335907335907336,
+                    "FN": 220,
+                    "FP": 125,
+                    "IoU": 0.5792682926829268,
+                    "TN": 6814924,
+                    "TP": 475,
+                    "n_pred": 600,
+                    "n_ref": 695
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_033.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_033.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.3158691129184793,
+                    "FN": 2,
+                    "FP": 3615,
+                    "IoU": 0.1875561545372866,
+                    "TN": 6942364,
+                    "TP": 835,
+                    "n_pred": 4450,
+                    "n_ref": 837
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4417,
+                    "IoU": 0.0,
+                    "TN": 6942399,
+                    "TP": 0,
+                    "n_pred": 4417,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 833,
+                    "IoU": 0.0,
+                    "TN": 6945983,
+                    "TP": 0,
+                    "n_pred": 833,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_035.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_035.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8193593883383439,
+                    "FN": 2031,
+                    "FP": 2836,
+                    "IoU": 0.6939955988682804,
+                    "TN": 8372703,
+                    "TP": 11038,
+                    "n_pred": 13874,
+                    "n_ref": 13069
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1721,
+                    "IoU": 0.0,
+                    "TN": 8386887,
+                    "TP": 0,
+                    "n_pred": 1721,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 792,
+                    "IoU": 0.0,
+                    "TN": 8387816,
+                    "TP": 0,
+                    "n_pred": 792,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_040.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_040.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8781925343811395,
+                    "FN": 67,
+                    "FP": 57,
+                    "IoU": 0.7828371278458844,
+                    "TN": 14399429,
+                    "TP": 447,
+                    "n_pred": 504,
+                    "n_ref": 514
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 476,
+                    "IoU": 0.0,
+                    "TN": 14399524,
+                    "TP": 0,
+                    "n_pred": 476,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 399,
+                    "IoU": 0.0,
+                    "TN": 14399601,
+                    "TP": 0,
+                    "n_pred": 399,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_046.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_046.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7055503292568204,
+                    "FN": 191,
+                    "FP": 122,
+                    "IoU": 0.5450581395348837,
+                    "TN": 6946128,
+                    "TP": 375,
+                    "n_pred": 497,
+                    "n_ref": 566
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 474,
+                    "IoU": 0.0,
+                    "TN": 6946342,
+                    "TP": 0,
+                    "n_pred": 474,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 409,
+                    "IoU": 0.0,
+                    "TN": 6946407,
+                    "TP": 0,
+                    "n_pred": 409,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_048.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_048.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6116983791402396,
+                    "FN": 205,
+                    "FP": 346,
+                    "IoU": 0.44060913705583754,
+                    "TN": 6683687,
+                    "TP": 434,
+                    "n_pred": 780,
+                    "n_ref": 639
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 257,
+                    "IoU": 0.0,
+                    "TN": 6684415,
+                    "TP": 0,
+                    "n_pred": 257,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 33,
+                    "IoU": 0.0,
+                    "TN": 6684639,
+                    "TP": 0,
+                    "n_pred": 33,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_052.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_052.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7992332968236583,
+                    "FN": 573,
+                    "FP": 3093,
+                    "IoU": 0.665602481072699,
+                    "TN": 14389037,
+                    "TP": 7297,
+                    "n_pred": 10390,
+                    "n_ref": 7870
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 6636,
+                    "IoU": 0.0,
+                    "TN": 14393364,
+                    "TP": 0,
+                    "n_pred": 6636,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1248,
+                    "IoU": 0.0,
+                    "TN": 14398752,
+                    "TP": 0,
+                    "n_pred": 1248,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_055.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_055.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.9150164028639161,
+                    "FN": 2483,
+                    "FP": 1066,
+                    "IoU": 0.8433458397704701,
+                    "TN": 8628097,
+                    "TP": 19106,
+                    "n_pred": 20172,
+                    "n_ref": 21589
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3637,
+                    "IoU": 0.0,
+                    "TN": 8647115,
+                    "TP": 0,
+                    "n_pred": 3637,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 437,
+                    "IoU": 0.0,
+                    "TN": 8650315,
+                    "TP": 0,
+                    "n_pred": 437,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_056.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_056.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8315171835708298,
+                    "FN": 89,
+                    "FP": 313,
+                    "IoU": 0.7116212338593975,
+                    "TN": 6945422,
+                    "TP": 992,
+                    "n_pred": 1305,
+                    "n_ref": 1081
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1298,
+                    "IoU": 0.0,
+                    "TN": 6945518,
+                    "TP": 0,
+                    "n_pred": 1298,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 747,
+                    "IoU": 0.0,
+                    "TN": 6946069,
+                    "TP": 0,
+                    "n_pred": 747,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_066.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_066.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7747670557995073,
+                    "FN": 1058,
+                    "FP": 1045,
+                    "IoU": 0.6323426573426574,
+                    "TN": 8251816,
+                    "TP": 3617,
+                    "n_pred": 4662,
+                    "n_ref": 4675
+                },
+                "(2, 3)": {
+                    "Dice": 0.780615016842334,
+                    "FN": 1083,
+                    "FP": 936,
+                    "IoU": 0.6401710924968811,
+                    "TN": 8251925,
+                    "TP": 3592,
+                    "n_pred": 4528,
+                    "n_ref": 4675
+                },
+                "(3,)": {
+                    "Dice": 0.7925270403146509,
+                    "FN": 943,
+                    "FP": 323,
+                    "IoU": 0.6563517915309446,
+                    "TN": 8253852,
+                    "TP": 2418,
+                    "n_pred": 2741,
+                    "n_ref": 3361
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_068.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_068.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8630470016207455,
+                    "FN": 827,
+                    "FP": 1201,
+                    "IoU": 0.7590876692801141,
+                    "TN": 8249118,
+                    "TP": 6390,
+                    "n_pred": 7591,
+                    "n_ref": 7217
+                },
+                "(2, 3)": {
+                    "Dice": 0.816897305171158,
+                    "FN": 850,
+                    "FP": 1664,
+                    "IoU": 0.6904703275055405,
+                    "TN": 8249414,
+                    "TP": 5608,
+                    "n_pred": 7272,
+                    "n_ref": 6458
+                },
+                "(3,)": {
+                    "Dice": 0.7223476297968398,
+                    "FN": 797,
+                    "FP": 187,
+                    "IoU": 0.5653710247349824,
+                    "TN": 8255272,
+                    "TP": 1280,
+                    "n_pred": 1467,
+                    "n_ref": 2077
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_084.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_084.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.32209958040462894,
+                    "FN": 125172,
+                    "FP": 1653,
+                    "IoU": 0.1919658500844191,
+                    "TN": 7052005,
+                    "TP": 30130,
+                    "n_pred": 31783,
+                    "n_ref": 155302
+                },
+                "(2, 3)": {
+                    "Dice": 0.07464809774665636,
+                    "FN": 142086,
+                    "FP": 371,
+                    "IoU": 0.03877114498356983,
+                    "TN": 7060757,
+                    "TP": 5746,
+                    "n_pred": 6117,
+                    "n_ref": 147832
+                },
+                "(3,)": {
+                    "Dice": 0.056878306878306875,
+                    "FN": 27018,
+                    "FP": 76,
+                    "IoU": 0.029271613342409804,
+                    "TN": 7181049,
+                    "TP": 817,
+                    "n_pred": 893,
+                    "n_ref": 27835
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_085.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_085.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7191011235955056,
+                    "FN": 1,
+                    "FP": 24,
+                    "IoU": 0.5614035087719298,
+                    "TN": 6553543,
+                    "TP": 32,
+                    "n_pred": 56,
+                    "n_ref": 33
+                },
+                "(2, 3)": {
+                    "Dice": 0.735632183908046,
+                    "FN": 1,
+                    "FP": 22,
+                    "IoU": 0.5818181818181818,
+                    "TN": 6553545,
+                    "TP": 32,
+                    "n_pred": 54,
+                    "n_ref": 33
+                },
+                "(3,)": {
+                    "Dice": 0.810126582278481,
+                    "FN": 1,
+                    "FP": 14,
+                    "IoU": 0.6808510638297872,
+                    "TN": 6553553,
+                    "TP": 32,
+                    "n_pred": 46,
+                    "n_ref": 33
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_087.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_087.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5917119565217391,
+                    "FN": 20,
+                    "FP": 1182,
+                    "IoU": 0.42016401350699467,
+                    "TN": 7206887,
+                    "TP": 871,
+                    "n_pred": 2053,
+                    "n_ref": 891
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2041,
+                    "IoU": 0.0,
+                    "TN": 7206919,
+                    "TP": 0,
+                    "n_pred": 2041,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 834,
+                    "IoU": 0.0,
+                    "TN": 7208126,
+                    "TP": 0,
+                    "n_pred": 834,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_090.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_090.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.16512040861116098,
+                    "FN": 295,
+                    "FP": 41550,
+                    "IoU": 0.08998977883130722,
+                    "TN": 8211553,
+                    "TP": 4138,
+                    "n_pred": 45688,
+                    "n_ref": 4433
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 45217,
+                    "IoU": 0.0,
+                    "TN": 8212319,
+                    "TP": 0,
+                    "n_pred": 45217,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4088,
+                    "IoU": 0.0,
+                    "TN": 8253448,
+                    "TP": 0,
+                    "n_pred": 4088,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_097.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_097.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.28368794326241137,
+                    "FN": 101,
+                    "FP": 0,
+                    "IoU": 0.1652892561983471,
+                    "TN": 8912775,
+                    "TP": 20,
+                    "n_pred": 20,
+                    "n_ref": 121
+                },
+                "(2, 3)": {
+                    "Dice": 0.28368794326241137,
+                    "FN": 101,
+                    "FP": 0,
+                    "IoU": 0.1652892561983471,
+                    "TN": 8912775,
+                    "TP": 20,
+                    "n_pred": 20,
+                    "n_ref": 121
+                },
+                "(3,)": {
+                    "Dice": 0.576271186440678,
+                    "FN": 25,
+                    "FP": 0,
+                    "IoU": 0.40476190476190477,
+                    "TN": 8912854,
+                    "TP": 17,
+                    "n_pred": 17,
+                    "n_ref": 42
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_099.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_099.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.37217349800131255,
+                    "FN": 201,
+                    "FP": 10322,
+                    "IoU": 0.22863216537164638,
+                    "TN": 8243894,
+                    "TP": 3119,
+                    "n_pred": 13441,
+                    "n_ref": 3320
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 13420,
+                    "IoU": 0.0,
+                    "TN": 8244116,
+                    "TP": 0,
+                    "n_pred": 13420,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3002,
+                    "IoU": 0.0,
+                    "TN": 8254534,
+                    "TP": 0,
+                    "n_pred": 3002,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_100.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_100.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5540494166094715,
+                    "FN": 10140,
+                    "FP": 256,
+                    "IoU": 0.3831731339741308,
+                    "TN": 8896042,
+                    "TP": 6458,
+                    "n_pred": 6714,
+                    "n_ref": 16598
+                },
+                "(2, 3)": {
+                    "Dice": 0.5530361590655329,
+                    "FN": 10159,
+                    "FP": 249,
+                    "IoU": 0.38220454680358523,
+                    "TN": 8896049,
+                    "TP": 6439,
+                    "n_pred": 6688,
+                    "n_ref": 16598
+                },
+                "(3,)": {
+                    "Dice": 0.9098832142234617,
+                    "FN": 366,
+                    "FP": 151,
+                    "IoU": 0.8346658138791173,
+                    "TN": 8909769,
+                    "TP": 2610,
+                    "n_pred": 2761,
+                    "n_ref": 2976
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_101.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_101.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6485097636176773,
+                    "FN": 1725,
+                    "FP": 1011,
+                    "IoU": 0.47984790874524713,
+                    "TN": 6810484,
+                    "TP": 2524,
+                    "n_pred": 3535,
+                    "n_ref": 4249
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3308,
+                    "IoU": 0.0,
+                    "TN": 6812436,
+                    "TP": 0,
+                    "n_pred": 3308,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2422,
+                    "IoU": 0.0,
+                    "TN": 6813322,
+                    "TP": 0,
+                    "n_pred": 2422,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_103.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_103.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.1860127388535032,
+                    "FN": 83,
+                    "FP": 63815,
+                    "IoU": 0.10254357505021137,
+                    "TN": 7006689,
+                    "TP": 7301,
+                    "n_pred": 71116,
+                    "n_ref": 7384
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 70332,
+                    "IoU": 0.0,
+                    "TN": 7007556,
+                    "TP": 0,
+                    "n_pred": 70332,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 6740,
+                    "IoU": 0.0,
+                    "TN": 7071148,
+                    "TP": 0,
+                    "n_pred": 6740,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_115.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_115.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6395348837209303,
+                    "FN": 275,
+                    "FP": 35,
+                    "IoU": 0.4700854700854701,
+                    "TN": 6815159,
+                    "TP": 275,
+                    "n_pred": 310,
+                    "n_ref": 550
+                },
+                "(2, 3)": {
+                    "Dice": 0.6395348837209303,
+                    "FN": 275,
+                    "FP": 35,
+                    "IoU": 0.4700854700854701,
+                    "TN": 6815159,
+                    "TP": 275,
+                    "n_pred": 310,
+                    "n_ref": 550
+                },
+                "(3,)": {
+                    "Dice": 0.7533783783783784,
+                    "FN": 130,
+                    "FP": 16,
+                    "IoU": 0.6043360433604336,
+                    "TN": 6815375,
+                    "TP": 223,
+                    "n_pred": 239,
+                    "n_ref": 353
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_134.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_134.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8195329087048833,
+                    "FN": 829,
+                    "FP": 1126,
+                    "IoU": 0.6942446043165468,
+                    "TN": 7071494,
+                    "TP": 4439,
+                    "n_pred": 5565,
+                    "n_ref": 5268
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2806,
+                    "IoU": 0.0,
+                    "TN": 7075082,
+                    "TP": 0,
+                    "n_pred": 2806,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 358,
+                    "IoU": 0.0,
+                    "TN": 7077530,
+                    "TP": 0,
+                    "n_pred": 358,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_144.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_144.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8926236680908015,
+                    "FN": 1835,
+                    "FP": 2337,
+                    "IoU": 0.8060707479198624,
+                    "TN": 6925303,
+                    "TP": 17341,
+                    "n_pred": 19678,
+                    "n_ref": 19176
+                },
+                "(2, 3)": {
+                    "Dice": 0.8842309101376459,
+                    "FN": 1875,
+                    "FP": 2549,
+                    "IoU": 0.7924855762465406,
+                    "TN": 6925497,
+                    "TP": 16895,
+                    "n_pred": 19444,
+                    "n_ref": 18770
+                },
+                "(3,)": {
+                    "Dice": 0.9017433552443556,
+                    "FN": 607,
+                    "FP": 1112,
+                    "IoU": 0.8210679712709482,
+                    "TN": 6937209,
+                    "TP": 7888,
+                    "n_pred": 9000,
+                    "n_ref": 8495
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_148.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_148.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.4558503697259678,
+                    "FN": 592,
+                    "FP": 659,
+                    "IoU": 0.2952112676056338,
+                    "TN": 14398225,
+                    "TP": 524,
+                    "n_pred": 1183,
+                    "n_ref": 1116
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1049,
+                    "IoU": 0.0,
+                    "TN": 14398951,
+                    "TP": 0,
+                    "n_pred": 1049,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 729,
+                    "IoU": 0.0,
+                    "TN": 14399271,
+                    "TP": 0,
+                    "n_pred": 729,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_160.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_160.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.26956045960240743,
+                    "FN": 9,
+                    "FP": 3996,
+                    "IoU": 0.15577571669477233,
+                    "TN": 8252792,
+                    "TP": 739,
+                    "n_pred": 4735,
+                    "n_ref": 748
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4714,
+                    "IoU": 0.0,
+                    "TN": 8252822,
+                    "TP": 0,
+                    "n_pred": 4714,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 705,
+                    "IoU": 0.0,
+                    "TN": 8256831,
+                    "TP": 0,
+                    "n_pred": 705,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_163.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_163.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.32211138819617624,
+                    "FN": 426,
+                    "FP": 2836,
+                    "IoU": 0.19197423829576418,
+                    "TN": 7598139,
+                    "TP": 775,
+                    "n_pred": 3611,
+                    "n_ref": 1201
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3587,
+                    "IoU": 0.0,
+                    "TN": 7598589,
+                    "TP": 0,
+                    "n_pred": 3587,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 608,
+                    "IoU": 0.0,
+                    "TN": 7601568,
+                    "TP": 0,
+                    "n_pred": 608,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_164.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_164.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.44854506742370476,
+                    "FN": 603,
+                    "FP": 174,
+                    "IoU": 0.2891125343092406,
+                    "TN": 28834747,
+                    "TP": 316,
+                    "n_pred": 490,
+                    "n_ref": 919
+                },
+                "(2, 3)": {
+                    "Dice": 0.4434782608695652,
+                    "FN": 613,
+                    "FP": 155,
+                    "IoU": 0.2849162011173184,
+                    "TN": 28834766,
+                    "TP": 306,
+                    "n_pred": 461,
+                    "n_ref": 919
+                },
+                "(3,)": {
+                    "Dice": 0.43167701863354035,
+                    "FN": 622,
+                    "FP": 110,
+                    "IoU": 0.27524752475247527,
+                    "TN": 28834830,
+                    "TP": 278,
+                    "n_pred": 388,
+                    "n_ref": 900
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_169.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_169.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6996155958264689,
+                    "FN": 1643,
+                    "FP": 3827,
+                    "IoU": 0.5380067567567568,
+                    "TN": 6934976,
+                    "TP": 6370,
+                    "n_pred": 10197,
+                    "n_ref": 8013
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2591,
+                    "IoU": 0.0,
+                    "TN": 6944225,
+                    "TP": 0,
+                    "n_pred": 2591,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 42,
+                    "IoU": 0.0,
+                    "TN": 6946774,
+                    "TP": 0,
+                    "n_pred": 42,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_183.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_183.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.9066455696202531,
+                    "FN": 177,
+                    "FP": 59,
+                    "IoU": 0.829232995658466,
+                    "TN": 11739802,
+                    "TP": 1146,
+                    "n_pred": 1205,
+                    "n_ref": 1323
+                },
+                "(2, 3)": {
+                    "Dice": 0.9014308426073132,
+                    "FN": 177,
+                    "FP": 71,
+                    "IoU": 0.8205499276410999,
+                    "TN": 11739802,
+                    "TP": 1134,
+                    "n_pred": 1205,
+                    "n_ref": 1311
+                },
+                "(3,)": {
+                    "Dice": 0.75,
+                    "FN": 51,
+                    "FP": 29,
+                    "IoU": 0.6,
+                    "TN": 11740984,
+                    "TP": 120,
+                    "n_pred": 149,
+                    "n_ref": 171
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_184.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_184.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7858649187802793,
+                    "FN": 1273,
+                    "FP": 2484,
+                    "IoU": 0.6472631677776735,
+                    "TN": 6542949,
+                    "TP": 6894,
+                    "n_pred": 9378,
+                    "n_ref": 8167
+                },
+                "(2, 3)": {
+                    "Dice": 0.785967723474877,
+                    "FN": 1298,
+                    "FP": 2442,
+                    "IoU": 0.6474026586216649,
+                    "TN": 6542993,
+                    "TP": 6867,
+                    "n_pred": 9309,
+                    "n_ref": 8165
+                },
+                "(3,)": {
+                    "Dice": 0.8870967741935484,
+                    "FN": 49,
+                    "FP": 119,
+                    "IoU": 0.7971014492753623,
+                    "TN": 6552772,
+                    "TP": 660,
+                    "n_pred": 779,
+                    "n_ref": 709
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_186.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_186.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7971223021582734,
+                    "FN": 36,
+                    "FP": 246,
+                    "IoU": 0.6626794258373205,
+                    "TN": 8387772,
+                    "TP": 554,
+                    "n_pred": 800,
+                    "n_ref": 590
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 756,
+                    "IoU": 0.0,
+                    "TN": 8387852,
+                    "TP": 0,
+                    "n_pred": 756,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 424,
+                    "IoU": 0.0,
+                    "TN": 8388184,
+                    "TP": 0,
+                    "n_pred": 424,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_191.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_191.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.20026124020349237,
+                    "FN": 23204,
+                    "FP": 62,
+                    "IoU": 0.11127239390351044,
+                    "TN": 6265277,
+                    "TP": 2913,
+                    "n_pred": 2975,
+                    "n_ref": 26117
+                },
+                "(2, 3)": {
+                    "Dice": 0.07483901366420606,
+                    "FN": 23540,
+                    "FP": 22,
+                    "IoU": 0.038874158678360186,
+                    "TN": 6266941,
+                    "TP": 953,
+                    "n_pred": 975,
+                    "n_ref": 24493
+                },
+                "(3,)": {
+                    "Dice": 0.0893854748603352,
+                    "FN": 2756,
+                    "FP": 15,
+                    "IoU": 0.04678362573099415,
+                    "TN": 6288549,
+                    "TP": 136,
+                    "n_pred": 151,
+                    "n_ref": 2892
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_195.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_195.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.23491846276656403,
+                    "FN": 6675,
+                    "FP": 34,
+                    "IoU": 0.13309213076624887,
+                    "TN": 6414789,
+                    "TP": 1030,
+                    "n_pred": 1064,
+                    "n_ref": 7705
+                },
+                "(2, 3)": {
+                    "Dice": 0.16430527443743304,
+                    "FN": 7015,
+                    "FP": 4,
+                    "IoU": 0.089505772473732,
+                    "TN": 6414819,
+                    "TP": 690,
+                    "n_pred": 694,
+                    "n_ref": 7705
+                },
+                "(3,)": {
+                    "Dice": 0.31942215088282505,
+                    "FN": 848,
+                    "FP": 0,
+                    "IoU": 0.19006685768863418,
+                    "TN": 6421481,
+                    "TP": 199,
+                    "n_pred": 199,
+                    "n_ref": 1047
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_196.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_196.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.737291558479026,
+                    "FN": 367,
+                    "FP": 4186,
+                    "IoU": 0.5838969109851947,
+                    "TN": 6935874,
+                    "TP": 6389,
+                    "n_pred": 10575,
+                    "n_ref": 6756
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 729,
+                    "IoU": 0.0,
+                    "TN": 6946087,
+                    "TP": 0,
+                    "n_pred": 729,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 161,
+                    "IoU": 0.0,
+                    "TN": 6946655,
+                    "TP": 0,
+                    "n_pred": 161,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_203.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_203.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5137470542026709,
+                    "FN": 307,
+                    "FP": 312,
+                    "IoU": 0.3456659619450317,
+                    "TN": 14399054,
+                    "TP": 327,
+                    "n_pred": 639,
+                    "n_ref": 634
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 615,
+                    "IoU": 0.0,
+                    "TN": 14399385,
+                    "TP": 0,
+                    "n_pred": 615,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 300,
+                    "IoU": 0.0,
+                    "TN": 14399700,
+                    "TP": 0,
+                    "n_pred": 300,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_207.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_207.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.27311696264543783,
+                    "FN": 21,
+                    "FP": 2353,
+                    "IoU": 0.15815602836879433,
+                    "TN": 6550780,
+                    "TP": 446,
+                    "n_pred": 2799,
+                    "n_ref": 467
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2798,
+                    "IoU": 0.0,
+                    "TN": 6550802,
+                    "TP": 0,
+                    "n_pred": 2798,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 521,
+                    "IoU": 0.0,
+                    "TN": 6553079,
+                    "TP": 0,
+                    "n_pred": 521,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_220.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_220.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8940628637951106,
+                    "FN": 376,
+                    "FP": 261,
+                    "IoU": 0.8084210526315789,
+                    "TN": 8254211,
+                    "TP": 2688,
+                    "n_pred": 2949,
+                    "n_ref": 3064
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 633,
+                    "IoU": 0.0,
+                    "TN": 8256903,
+                    "TP": 0,
+                    "n_pred": 633,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 126,
+                    "IoU": 0.0,
+                    "TN": 8257410,
+                    "TP": 0,
+                    "n_pred": 126,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_222.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_222.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.22385204081632654,
+                    "FN": 28844,
+                    "FP": 364,
+                    "IoU": 0.12603231597845602,
+                    "TN": 10616180,
+                    "TP": 4212,
+                    "n_pred": 4576,
+                    "n_ref": 33056
+                },
+                "(2, 3)": {
+                    "Dice": 0.10367465257055163,
+                    "FN": 31200,
+                    "FP": 339,
+                    "IoU": 0.054671342505170396,
+                    "TN": 10616237,
+                    "TP": 1824,
+                    "n_pred": 2163,
+                    "n_ref": 33024
+                },
+                "(3,)": {
+                    "Dice": 0.36771084337349397,
+                    "FN": 2313,
+                    "FP": 311,
+                    "IoU": 0.22527310304103926,
+                    "TN": 10646213,
+                    "TP": 763,
+                    "n_pred": 1074,
+                    "n_ref": 3076
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_229.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_229.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7039459341617615,
+                    "FN": 1463,
+                    "FP": 1253,
+                    "IoU": 0.5431455004205215,
+                    "TN": 10643655,
+                    "TP": 3229,
+                    "n_pred": 4482,
+                    "n_ref": 4692
+                },
+                "(2, 3)": {
+                    "Dice": 0.7033814296728714,
+                    "FN": 1492,
+                    "FP": 1201,
+                    "IoU": 0.5424736663268773,
+                    "TN": 10643714,
+                    "TP": 3193,
+                    "n_pred": 4394,
+                    "n_ref": 4685
+                },
+                "(3,)": {
+                    "Dice": 0.7966862271315154,
+                    "FN": 502,
+                    "FP": 676,
+                    "IoU": 0.6620768789443489,
+                    "TN": 10646114,
+                    "TP": 2308,
+                    "n_pred": 2984,
+                    "n_ref": 2810
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_230.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_230.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8702983138780804,
+                    "FN": 190,
+                    "FP": 1410,
+                    "IoU": 0.7703788748564868,
+                    "TN": 6546632,
+                    "TP": 5368,
+                    "n_pred": 6778,
+                    "n_ref": 5558
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 385,
+                    "IoU": 0.0,
+                    "TN": 6553215,
+                    "TP": 0,
+                    "n_pred": 385,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": NaN,
+                    "FN": 0,
+                    "FP": 0,
+                    "IoU": NaN,
+                    "TN": 6553600,
+                    "TP": 0,
+                    "n_pred": 0,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_237.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_237.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7983539094650206,
+                    "FN": 41,
+                    "FP": 57,
+                    "IoU": 0.6643835616438356,
+                    "TN": 8257244,
+                    "TP": 194,
+                    "n_pred": 251,
+                    "n_ref": 235
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 251,
+                    "IoU": 0.0,
+                    "TN": 8257285,
+                    "TP": 0,
+                    "n_pred": 251,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 179,
+                    "IoU": 0.0,
+                    "TN": 8257357,
+                    "TP": 0,
+                    "n_pred": 179,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_243.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_243.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.370464943079051,
+                    "FN": 11230,
+                    "FP": 6521,
+                    "IoU": 0.22734395403499608,
+                    "TN": 10626626,
+                    "TP": 5223,
+                    "n_pred": 11744,
+                    "n_ref": 16453
+                },
+                "(2, 3)": {
+                    "Dice": 0.3473710800765039,
+                    "FN": 11558,
+                    "FP": 6527,
+                    "IoU": 0.21019302995894837,
+                    "TN": 10626702,
+                    "TP": 4813,
+                    "n_pred": 11340,
+                    "n_ref": 16371
+                },
+                "(3,)": {
+                    "Dice": 0.5752881397942744,
+                    "FN": 3228,
+                    "FP": 199,
+                    "IoU": 0.40379262352122475,
+                    "TN": 10643852,
+                    "TP": 2321,
+                    "n_pred": 2520,
+                    "n_ref": 5549
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_255.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_255.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7521367521367521,
+                    "FN": 52,
+                    "FP": 6,
+                    "IoU": 0.6027397260273972,
+                    "TN": 7077742,
+                    "TP": 88,
+                    "n_pred": 94,
+                    "n_ref": 140
+                },
+                "(2, 3)": {
+                    "Dice": 0.7521367521367521,
+                    "FN": 52,
+                    "FP": 6,
+                    "IoU": 0.6027397260273972,
+                    "TN": 7077742,
+                    "TP": 88,
+                    "n_pred": 94,
+                    "n_ref": 140
+                },
+                "(3,)": {
+                    "Dice": 0.8141592920353983,
+                    "FN": 16,
+                    "FP": 5,
+                    "IoU": 0.6865671641791045,
+                    "TN": 7077821,
+                    "TP": 46,
+                    "n_pred": 51,
+                    "n_ref": 62
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_258.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_258.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5116027088036117,
+                    "FN": 188,
+                    "FP": 5221,
+                    "IoU": 0.34372725066731374,
+                    "TN": 10641358,
+                    "TP": 2833,
+                    "n_pred": 8054,
+                    "n_ref": 3021
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 7905,
+                    "IoU": 0.0,
+                    "TN": 10641695,
+                    "TP": 0,
+                    "n_pred": 7905,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2649,
+                    "IoU": 0.0,
+                    "TN": 10646951,
+                    "TP": 0,
+                    "n_pred": 2649,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_266.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_266.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.1266004547086275,
+                    "FN": 140,
+                    "FP": 36355,
+                    "IoU": 0.0675779253960143,
+                    "TN": 6907676,
+                    "TP": 2645,
+                    "n_pred": 39000,
+                    "n_ref": 2785
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 38716,
+                    "IoU": 0.0,
+                    "TN": 6908100,
+                    "TP": 0,
+                    "n_pred": 38716,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2407,
+                    "IoU": 0.0,
+                    "TN": 6944409,
+                    "TP": 0,
+                    "n_pred": 2407,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_275.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_275.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8967740230917594,
+                    "FN": 2735,
+                    "FP": 1172,
+                    "IoU": 0.8128652169748061,
+                    "TN": 14379122,
+                    "TP": 16971,
+                    "n_pred": 18143,
+                    "n_ref": 19706
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2074,
+                    "IoU": 0.0,
+                    "TN": 14397926,
+                    "TP": 0,
+                    "n_pred": 2074,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1142,
+                    "IoU": 0.0,
+                    "TN": 14398858,
+                    "TP": 0,
+                    "n_pred": 1142,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_276.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_276.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.09531144547222994,
+                    "FN": 113798,
+                    "FP": 143,
+                    "IoU": 0.05004043587370668,
+                    "TN": 10529657,
+                    "TP": 6002,
+                    "n_pred": 6145,
+                    "n_ref": 119800
+                },
+                "(2, 3)": {
+                    "Dice": 0.016395209084504123,
+                    "FN": 118570,
+                    "FP": 97,
+                    "IoU": 0.008265360700675269,
+                    "TN": 10529944,
+                    "TP": 989,
+                    "n_pred": 1086,
+                    "n_ref": 119559
+                },
+                "(3,)": {
+                    "Dice": 0.1994452516180161,
+                    "FN": 6005,
+                    "FP": 56,
+                    "IoU": 0.110768779342723,
+                    "TN": 10642784,
+                    "TP": 755,
+                    "n_pred": 811,
+                    "n_ref": 6760
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_286.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_286.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.21331332404330583,
+                    "FN": 533,
+                    "FP": 36162,
+                    "IoU": 0.11939044876409888,
+                    "TN": 14358330,
+                    "TP": 4975,
+                    "n_pred": 41137,
+                    "n_ref": 5508
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 40605,
+                    "IoU": 0.0,
+                    "TN": 14359395,
+                    "TP": 0,
+                    "n_pred": 40605,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4939,
+                    "IoU": 0.0,
+                    "TN": 14395061,
+                    "TP": 0,
+                    "n_pred": 4939,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_289.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_289.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6197281013440445,
+                    "FN": 8668,
+                    "FP": 1178,
+                    "IoU": 0.44898987072583807,
+                    "TN": 10631731,
+                    "TP": 8023,
+                    "n_pred": 9201,
+                    "n_ref": 16691
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 531,
+                    "IoU": 0.0,
+                    "TN": 10649069,
+                    "TP": 0,
+                    "n_pred": 531,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 153,
+                    "IoU": 0.0,
+                    "TN": 10649447,
+                    "TP": 0,
+                    "n_pred": 153,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_295.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_295.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8077948034643571,
+                    "FN": 795,
+                    "FP": 359,
+                    "IoU": 0.6775635652416876,
+                    "TN": 7461381,
+                    "TP": 2425,
+                    "n_pred": 2784,
+                    "n_ref": 3220
+                },
+                "(2, 3)": {
+                    "Dice": 0.8081550802139037,
+                    "FN": 802,
+                    "FP": 346,
+                    "IoU": 0.67807066741447,
+                    "TN": 7461394,
+                    "TP": 2418,
+                    "n_pred": 2764,
+                    "n_ref": 3220
+                },
+                "(3,)": {
+                    "Dice": 0.7859778597785978,
+                    "FN": 175,
+                    "FP": 57,
+                    "IoU": 0.6474164133738601,
+                    "TN": 7464302,
+                    "TP": 426,
+                    "n_pred": 483,
+                    "n_ref": 601
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_298.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_298.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7212020033388982,
+                    "FN": 43,
+                    "FP": 124,
+                    "IoU": 0.5639686684073107,
+                    "TN": 6946433,
+                    "TP": 216,
+                    "n_pred": 340,
+                    "n_ref": 259
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 134,
+                    "IoU": 0.0,
+                    "TN": 6946682,
+                    "TP": 0,
+                    "n_pred": 134,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 19,
+                    "IoU": 0.0,
+                    "TN": 6946797,
+                    "TP": 0,
+                    "n_pred": 19,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_304.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_304.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.02146690518783542,
+                    "FN": 38,
+                    "FP": 1056,
+                    "IoU": 0.0108499095840868,
+                    "TN": 7207854,
+                    "TP": 12,
+                    "n_pred": 1068,
+                    "n_ref": 50
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 843,
+                    "IoU": 0.0,
+                    "TN": 7208117,
+                    "TP": 0,
+                    "n_pred": 843,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 283,
+                    "IoU": 0.0,
+                    "TN": 7208677,
+                    "TP": 0,
+                    "n_pred": 283,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_305.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_305.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8169201866553543,
+                    "FN": 1566,
+                    "FP": 1455,
+                    "IoU": 0.6905030222313288,
+                    "TN": 7199199,
+                    "TP": 6740,
+                    "n_pred": 8195,
+                    "n_ref": 8306
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 696,
+                    "IoU": 0.0,
+                    "TN": 7208264,
+                    "TP": 0,
+                    "n_pred": 696,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 110,
+                    "IoU": 0.0,
+                    "TN": 7208850,
+                    "TP": 0,
+                    "n_pred": 110,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_306.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_306.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.903901283809049,
+                    "FN": 537,
+                    "FP": 4089,
+                    "IoU": 0.8246531726176939,
+                    "TN": 11237618,
+                    "TP": 21756,
+                    "n_pred": 25845,
+                    "n_ref": 22293
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1651,
+                    "IoU": 0.0,
+                    "TN": 11262349,
+                    "TP": 0,
+                    "n_pred": 1651,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 583,
+                    "IoU": 0.0,
+                    "TN": 11263417,
+                    "TP": 0,
+                    "n_pred": 583,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_311.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_311.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.2706096268934513,
+                    "FN": 101464,
+                    "FP": 426,
+                    "IoU": 0.15647688983450753,
+                    "TN": 35530793,
+                    "TP": 18901,
+                    "n_pred": 19327,
+                    "n_ref": 120365
+                },
+                "(2, 3)": {
+                    "Dice": 0.004109119963474489,
+                    "FN": 113425,
+                    "FP": 0,
+                    "IoU": 0.0020587898890541004,
+                    "TN": 35537925,
+                    "TP": 234,
+                    "n_pred": 234,
+                    "n_ref": 113659
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 17827,
+                    "FP": 0,
+                    "IoU": 0.0,
+                    "TN": 35633757,
+                    "TP": 0,
+                    "n_pred": 0,
+                    "n_ref": 17827
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_323.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_323.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.9713302752293578,
+                    "FN": 16,
+                    "FP": 34,
+                    "IoU": 0.9442586399108138,
+                    "TN": 8387711,
+                    "TP": 847,
+                    "n_pred": 881,
+                    "n_ref": 863
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4,
+                    "IoU": 0.0,
+                    "TN": 8388604,
+                    "TP": 0,
+                    "n_pred": 4,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4,
+                    "IoU": 0.0,
+                    "TN": 8388604,
+                    "TP": 0,
+                    "n_pred": 4,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_327.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_327.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.9370715157401077,
+                    "FN": 1416,
+                    "FP": 8433,
+                    "IoU": 0.8815941332050974,
+                    "TN": 7256852,
+                    "TP": 73331,
+                    "n_pred": 81764,
+                    "n_ref": 74747
+                },
+                "(2, 3)": {
+                    "Dice": 0.940172147995889,
+                    "FN": 1548,
+                    "FP": 7766,
+                    "IoU": 0.887098924809387,
+                    "TN": 7257535,
+                    "TP": 73183,
+                    "n_pred": 80949,
+                    "n_ref": 74731
+                },
+                "(3,)": {
+                    "Dice": 0.9434093506235405,
+                    "FN": 560,
+                    "FP": 579,
+                    "IoU": 0.8928806545659739,
+                    "TN": 7329399,
+                    "TP": 9494,
+                    "n_pred": 10073,
+                    "n_ref": 10054
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_332.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_332.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8235763704097925,
+                    "FN": 509,
+                    "FP": 817,
+                    "IoU": 0.7000678579506899,
+                    "TN": 6418107,
+                    "TP": 3095,
+                    "n_pred": 3912,
+                    "n_ref": 3604
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 437,
+                    "IoU": 0.0,
+                    "TN": 6422091,
+                    "TP": 0,
+                    "n_pred": 437,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 87,
+                    "IoU": 0.0,
+                    "TN": 6422441,
+                    "TP": 0,
+                    "n_pred": 87,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_334.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_334.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.889300525662361,
+                    "FN": 7948,
+                    "FP": 25578,
+                    "IoU": 0.8006670987151512,
+                    "TN": 10481409,
+                    "TP": 134665,
+                    "n_pred": 160243,
+                    "n_ref": 142613
+                },
+                "(2, 3)": {
+                    "Dice": 0.8912953767921087,
+                    "FN": 8432,
+                    "FP": 24232,
+                    "IoU": 0.8039069722765858,
+                    "TN": 10483026,
+                    "TP": 133910,
+                    "n_pred": 158142,
+                    "n_ref": 142342
+                },
+                "(3,)": {
+                    "Dice": 0.8363629740264471,
+                    "FN": 3798,
+                    "FP": 5186,
+                    "IoU": 0.7187490216948941,
+                    "TN": 10617657,
+                    "TP": 22959,
+                    "n_pred": 28145,
+                    "n_ref": 26757
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_335.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_335.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7636214666120442,
+                    "FN": 93,
+                    "FP": 1061,
+                    "IoU": 0.6176275679257787,
+                    "TN": 6943798,
+                    "TP": 1864,
+                    "n_pred": 2925,
+                    "n_ref": 1957
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1759,
+                    "IoU": 0.0,
+                    "TN": 6945057,
+                    "TP": 0,
+                    "n_pred": 1759,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 436,
+                    "IoU": 0.0,
+                    "TN": 6946380,
+                    "TP": 0,
+                    "n_pred": 436,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_338.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_338.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8097928436911488,
+                    "FN": 187,
+                    "FP": 15,
+                    "IoU": 0.680379746835443,
+                    "TN": 14399368,
+                    "TP": 430,
+                    "n_pred": 445,
+                    "n_ref": 617
+                },
+                "(2, 3)": {
+                    "Dice": 0.8018957345971564,
+                    "FN": 194,
+                    "FP": 15,
+                    "IoU": 0.6693037974683544,
+                    "TN": 14399368,
+                    "TP": 423,
+                    "n_pred": 438,
+                    "n_ref": 617
+                },
+                "(3,)": {
+                    "Dice": 0.850253807106599,
+                    "FN": 116,
+                    "FP": 2,
+                    "IoU": 0.739514348785872,
+                    "TN": 14399547,
+                    "TP": 335,
+                    "n_pred": 337,
+                    "n_ref": 451
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_351.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_351.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5555555555555556,
+                    "FN": 511,
+                    "FP": 49,
+                    "IoU": 0.38461538461538464,
+                    "TN": 8256626,
+                    "TP": 350,
+                    "n_pred": 399,
+                    "n_ref": 861
+                },
+                "(2, 3)": {
+                    "Dice": 0.5490822027134876,
+                    "FN": 517,
+                    "FP": 48,
+                    "IoU": 0.37843784378437845,
+                    "TN": 8256627,
+                    "TP": 344,
+                    "n_pred": 392,
+                    "n_ref": 861
+                },
+                "(3,)": {
+                    "Dice": 0.7663551401869159,
+                    "FN": 116,
+                    "FP": 34,
+                    "IoU": 0.6212121212121212,
+                    "TN": 8257140,
+                    "TP": 246,
+                    "n_pred": 280,
+                    "n_ref": 362
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_358.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_358.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6287425149700598,
+                    "FN": 90,
+                    "FP": 34,
+                    "IoU": 0.4585152838427948,
+                    "TN": 6684443,
+                    "TP": 105,
+                    "n_pred": 139,
+                    "n_ref": 195
+                },
+                "(2, 3)": {
+                    "Dice": 0.6261398176291794,
+                    "FN": 92,
+                    "FP": 31,
+                    "IoU": 0.4557522123893805,
+                    "TN": 6684446,
+                    "TP": 103,
+                    "n_pred": 134,
+                    "n_ref": 195
+                },
+                "(3,)": {
+                    "Dice": 0.6219081272084805,
+                    "FN": 91,
+                    "FP": 16,
+                    "IoU": 0.4512820512820513,
+                    "TN": 6684477,
+                    "TP": 88,
+                    "n_pred": 104,
+                    "n_ref": 179
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_359.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_359.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.24544130205455367,
+                    "FN": 29988,
+                    "FP": 54,
+                    "IoU": 0.13988776912505727,
+                    "TN": 10614672,
+                    "TP": 4886,
+                    "n_pred": 4940,
+                    "n_ref": 34874
+                },
+                "(2, 3)": {
+                    "Dice": 0.11255605381165919,
+                    "FN": 31661,
+                    "FP": 3,
+                    "IoU": 0.05963411736754574,
+                    "TN": 10615928,
+                    "TP": 2008,
+                    "n_pred": 2011,
+                    "n_ref": 33669
+                },
+                "(3,)": {
+                    "Dice": 0.054261909848323006,
+                    "FN": 4427,
+                    "FP": 0,
+                    "IoU": 0.027887571365832236,
+                    "TN": 10645046,
+                    "TP": 127,
+                    "n_pred": 127,
+                    "n_ref": 4554
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_361.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_361.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6260733801717409,
+                    "FN": 94,
+                    "FP": 864,
+                    "IoU": 0.4556818181818182,
+                    "TN": 6420768,
+                    "TP": 802,
+                    "n_pred": 1666,
+                    "n_ref": 896
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1577,
+                    "IoU": 0.0,
+                    "TN": 6420951,
+                    "TP": 0,
+                    "n_pred": 1577,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1028,
+                    "IoU": 0.0,
+                    "TN": 6421500,
+                    "TP": 0,
+                    "n_pred": 1028,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_362.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_362.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8147895723291873,
+                    "FN": 468,
+                    "FP": 619,
+                    "IoU": 0.6874640598044853,
+                    "TN": 6943338,
+                    "TP": 2391,
+                    "n_pred": 3010,
+                    "n_ref": 2859
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 183,
+                    "IoU": 0.0,
+                    "TN": 6946633,
+                    "TP": 0,
+                    "n_pred": 183,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 127,
+                    "IoU": 0.0,
+                    "TN": 6946689,
+                    "TP": 0,
+                    "n_pred": 127,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_368.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_368.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7899523603291468,
+                    "FN": 1883,
+                    "FP": 57,
+                    "IoU": 0.6528274874731568,
+                    "TN": 6285868,
+                    "TP": 3648,
+                    "n_pred": 3705,
+                    "n_ref": 5531
+                },
+                "(2, 3)": {
+                    "Dice": 0.764751466843795,
+                    "FN": 2077,
+                    "FP": 48,
+                    "IoU": 0.6191073669116329,
+                    "TN": 6285877,
+                    "TP": 3454,
+                    "n_pred": 3502,
+                    "n_ref": 5531
+                },
+                "(3,)": {
+                    "Dice": 0.3530967599735508,
+                    "FN": 2904,
+                    "FP": 31,
+                    "IoU": 0.21440042826552463,
+                    "TN": 6287720,
+                    "TP": 801,
+                    "n_pred": 832,
+                    "n_ref": 3705
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_377.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_377.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6679738562091503,
+                    "FN": 33,
+                    "FP": 475,
+                    "IoU": 0.5014720314033366,
+                    "TN": 10648581,
+                    "TP": 511,
+                    "n_pred": 986,
+                    "n_ref": 544
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 980,
+                    "IoU": 0.0,
+                    "TN": 10648620,
+                    "TP": 0,
+                    "n_pred": 980,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 505,
+                    "IoU": 0.0,
+                    "TN": 10649095,
+                    "TP": 0,
+                    "n_pred": 505,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_379.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_379.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8813262721620999,
+                    "FN": 1008,
+                    "FP": 1569,
+                    "IoU": 0.787831384818047,
+                    "TN": 6672526,
+                    "TP": 9569,
+                    "n_pred": 11138,
+                    "n_ref": 10577
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1916,
+                    "IoU": 0.0,
+                    "TN": 6682756,
+                    "TP": 0,
+                    "n_pred": 1916,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1351,
+                    "IoU": 0.0,
+                    "TN": 6683321,
+                    "TP": 0,
+                    "n_pred": 1351,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_381.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_381.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.3137806347930896,
+                    "FN": 97,
+                    "FP": 3319,
+                    "IoU": 0.18608529902311174,
+                    "TN": 6942619,
+                    "TP": 781,
+                    "n_pred": 4100,
+                    "n_ref": 878
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 4083,
+                    "IoU": 0.0,
+                    "TN": 6942733,
+                    "TP": 0,
+                    "n_pred": 4083,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 942,
+                    "IoU": 0.0,
+                    "TN": 6945874,
+                    "TP": 0,
+                    "n_pred": 942,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_383.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_383.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8879550942331211,
+                    "FN": 2975,
+                    "FP": 598,
+                    "IoU": 0.7984885229259489,
+                    "TN": 14662333,
+                    "TP": 14158,
+                    "n_pred": 14756,
+                    "n_ref": 17133
+                },
+                "(2, 3)": {
+                    "Dice": 0.8422193040052528,
+                    "FN": 2982,
+                    "FP": 1824,
+                    "IoU": 0.7274428628140418,
+                    "TN": 14662431,
+                    "TP": 12827,
+                    "n_pred": 14651,
+                    "n_ref": 15809
+                },
+                "(3,)": {
+                    "Dice": 0.8200431739386407,
+                    "FN": 1967,
+                    "FP": 784,
+                    "IoU": 0.69497727020734,
+                    "TN": 14671045,
+                    "TP": 6268,
+                    "n_pred": 7052,
+                    "n_ref": 8235
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_385.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_385.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8172027182846349,
+                    "FN": 13723,
+                    "FP": 1179,
+                    "IoU": 0.6909068281755579,
+                    "TN": 6767532,
+                    "TP": 33310,
+                    "n_pred": 34489,
+                    "n_ref": 47033
+                },
+                "(2, 3)": {
+                    "Dice": 0.8523348984041628,
+                    "FN": 10273,
+                    "FP": 766,
+                    "IoU": 0.7426686558813931,
+                    "TN": 6772846,
+                    "TP": 31859,
+                    "n_pred": 32625,
+                    "n_ref": 42132
+                },
+                "(3,)": {
+                    "Dice": 0.3778468778888982,
+                    "FN": 7282,
+                    "FP": 121,
+                    "IoU": 0.23292923013159259,
+                    "TN": 6806093,
+                    "TP": 2248,
+                    "n_pred": 2369,
+                    "n_ref": 9530
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_409.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_409.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.843934129022511,
+                    "FN": 2207,
+                    "FP": 1925,
+                    "IoU": 0.7300052273915316,
+                    "TN": 11519032,
+                    "TP": 11172,
+                    "n_pred": 13097,
+                    "n_ref": 13379
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1122,
+                    "IoU": 0.0,
+                    "TN": 11533214,
+                    "TP": 0,
+                    "n_pred": 1122,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 174,
+                    "IoU": 0.0,
+                    "TN": 11534162,
+                    "TP": 0,
+                    "n_pred": 174,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_417.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_417.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.3338220221337104,
+                    "FN": 153728,
+                    "FP": 313,
+                    "IoU": 0.2003519591353641,
+                    "TN": 10456964,
+                    "TP": 38595,
+                    "n_pred": 38908,
+                    "n_ref": 192323
+                },
+                "(2, 3)": {
+                    "Dice": 0.1088005997760971,
+                    "FN": 175897,
+                    "FP": 32,
+                    "IoU": 0.0575299462146699,
+                    "TN": 10462932,
+                    "TP": 10739,
+                    "n_pred": 10771,
+                    "n_ref": 186636
+                },
+                "(3,)": {
+                    "Dice": 0.04245249699795154,
+                    "FN": 27093,
+                    "FP": 19,
+                    "IoU": 0.021686573088442247,
+                    "TN": 10621887,
+                    "TP": 601,
+                    "n_pred": 620,
+                    "n_ref": 27694
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_424.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_424.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7569914816141056,
+                    "FN": 11235,
+                    "FP": 36948,
+                    "IoU": 0.6089994319565041,
+                    "TN": 55975586,
+                    "TP": 75047,
+                    "n_pred": 111995,
+                    "n_ref": 86282
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 22118,
+                    "IoU": 0.0,
+                    "TN": 56076698,
+                    "TP": 0,
+                    "n_pred": 22118,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3079,
+                    "IoU": 0.0,
+                    "TN": 56095737,
+                    "TP": 0,
+                    "n_pred": 3079,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_429.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_429.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.525768748038908,
+                    "FN": 739,
+                    "FP": 71807,
+                    "IoU": 0.3566392635751723,
+                    "TN": 12175239,
+                    "TP": 40215,
+                    "n_pred": 112022,
+                    "n_ref": 40954
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 111478,
+                    "IoU": 0.0,
+                    "TN": 12176522,
+                    "TP": 0,
+                    "n_pred": 111478,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 41898,
+                    "IoU": 0.0,
+                    "TN": 12246102,
+                    "TP": 0,
+                    "n_pred": 41898,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_432.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_432.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.7460629921259843,
+                    "FN": 132,
+                    "FP": 126,
+                    "IoU": 0.5949764521193093,
+                    "TN": 6946179,
+                    "TP": 379,
+                    "n_pred": 505,
+                    "n_ref": 511
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 378,
+                    "IoU": 0.0,
+                    "TN": 6946438,
+                    "TP": 0,
+                    "n_pred": 378,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 168,
+                    "IoU": 0.0,
+                    "TN": 6946648,
+                    "TP": 0,
+                    "n_pred": 168,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_437.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_437.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8617753275673692,
+                    "FN": 14923,
+                    "FP": 1650,
+                    "IoU": 0.7571223401137229,
+                    "TN": 6878580,
+                    "TP": 51663,
+                    "n_pred": 53313,
+                    "n_ref": 66586
+                },
+                "(2, 3)": {
+                    "Dice": 0.8482104650565702,
+                    "FN": 15774,
+                    "FP": 1962,
+                    "IoU": 0.7364283485161462,
+                    "TN": 6879525,
+                    "TP": 49555,
+                    "n_pred": 51517,
+                    "n_ref": 65329
+                },
+                "(3,)": {
+                    "Dice": 0.6823132382267219,
+                    "FN": 8139,
+                    "FP": 145,
+                    "IoU": 0.5178114086146682,
+                    "TN": 6929636,
+                    "TP": 8896,
+                    "n_pred": 9041,
+                    "n_ref": 17035
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_438.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_438.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.6589424572317263,
+                    "FN": 826,
+                    "FP": 3560,
+                    "IoU": 0.49136031543546327,
+                    "TN": 6676049,
+                    "TP": 4237,
+                    "n_pred": 7797,
+                    "n_ref": 5063
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 3895,
+                    "IoU": 0.0,
+                    "TN": 6680777,
+                    "TP": 0,
+                    "n_pred": 3895,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 449,
+                    "IoU": 0.0,
+                    "TN": 6684223,
+                    "TP": 0,
+                    "n_pred": 449,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_440.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_440.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8448769318832284,
+                    "FN": 450,
+                    "FP": 363,
+                    "IoU": 0.7314172447968286,
+                    "TN": 7074861,
+                    "TP": 2214,
+                    "n_pred": 2577,
+                    "n_ref": 2664
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 873,
+                    "IoU": 0.0,
+                    "TN": 7077015,
+                    "TP": 0,
+                    "n_pred": 873,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 397,
+                    "IoU": 0.0,
+                    "TN": 7077491,
+                    "TP": 0,
+                    "n_pred": 397,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_441.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_441.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.41223688904744915,
+                    "FN": 318,
+                    "FP": 12862,
+                    "IoU": 0.2596337490169644,
+                    "TN": 11723382,
+                    "TP": 4622,
+                    "n_pred": 17484,
+                    "n_ref": 4940
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 14915,
+                    "IoU": 0.0,
+                    "TN": 11726269,
+                    "TP": 0,
+                    "n_pred": 14915,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 1306,
+                    "IoU": 0.0,
+                    "TN": 11739878,
+                    "TP": 0,
+                    "n_pred": 1306,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_444.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_444.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5309734513274337,
+                    "FN": 28,
+                    "FP": 25,
+                    "IoU": 0.3614457831325301,
+                    "TN": 6815661,
+                    "TP": 30,
+                    "n_pred": 55,
+                    "n_ref": 58
+                },
+                "(2, 3)": {
+                    "Dice": 0.5714285714285714,
+                    "FN": 28,
+                    "FP": 17,
+                    "IoU": 0.4,
+                    "TN": 6815669,
+                    "TP": 30,
+                    "n_pred": 47,
+                    "n_ref": 58
+                },
+                "(3,)": {
+                    "Dice": 0.8484848484848485,
+                    "FN": 0,
+                    "FP": 10,
+                    "IoU": 0.7368421052631579,
+                    "TN": 6815706,
+                    "TP": 28,
+                    "n_pred": 38,
+                    "n_ref": 28
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_445.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_445.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.5181255526083113,
+                    "FN": 273,
+                    "FP": 272,
+                    "IoU": 0.3496420047732697,
+                    "TN": 6814906,
+                    "TP": 293,
+                    "n_pred": 565,
+                    "n_ref": 566
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 552,
+                    "IoU": 0.0,
+                    "TN": 6815192,
+                    "TP": 0,
+                    "n_pred": 552,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 441,
+                    "IoU": 0.0,
+                    "TN": 6815303,
+                    "TP": 0,
+                    "n_pred": 441,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_447.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_447.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.35,
+                    "FN": 12,
+                    "FP": 14,
+                    "IoU": 0.21212121212121213,
+                    "TN": 7208927,
+                    "TP": 7,
+                    "n_pred": 21,
+                    "n_ref": 19
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 10,
+                    "IoU": 0.0,
+                    "TN": 7208950,
+                    "TP": 0,
+                    "n_pred": 10,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 10,
+                    "IoU": 0.0,
+                    "TN": 7208950,
+                    "TP": 0,
+                    "n_pred": 10,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_449.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_449.nii.gz"
+        },
+        {
+            "metrics": {
+                "(1, 2, 3)": {
+                    "Dice": 0.8235294117647058,
+                    "FN": 1319,
+                    "FP": 433,
+                    "IoU": 0.7,
+                    "TN": 7072048,
+                    "TP": 4088,
+                    "n_pred": 4521,
+                    "n_ref": 5407
+                },
+                "(2, 3)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 462,
+                    "IoU": 0.0,
+                    "TN": 7077426,
+                    "TP": 0,
+                    "n_pred": 462,
+                    "n_ref": 0
+                },
+                "(3,)": {
+                    "Dice": 0.0,
+                    "FN": 0,
+                    "FP": 2,
+                    "IoU": 0.0,
+                    "TN": 7077886,
+                    "TP": 0,
+                    "n_pred": 2,
+                    "n_ref": 0
+                }
+            },
+            "prediction_file": "/workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainerMetsConfigurable_exp_lr_3e-4_wd_1e-4_dropout_0.2__nnUNetResEncUNetLPlans_custom_0624__3d_fullres/fold_0/validation/UCSFbrainmets_458.nii.gz",
+            "reference_file": "/workspace/nnunet_data/nnUNet_preprocessed/Dataset001_UCSFbrainmets/gt_segmentations/UCSFbrainmets_458.nii.gz"
+        }
+    ]
+}
