@@ -1,0 +1,8 @@
+# configs/exp5_0628/run5_3.yaml
+experiment_name: "run5_3"
+optimizer: "AdamW"
+initial_lr: 0.0001
+weight_decay: 0.0005
+num_epochs: 300
+dropout_p: 0.3
+region_weights: [1.0, 2.0, 5.0]
