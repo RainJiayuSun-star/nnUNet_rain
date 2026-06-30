@@ -1,0 +1,28 @@
+{
+    "channel_names": {
+        "0": "FLAIR",
+        "1": "T1post"
+    },
+    "labels": {
+        "background": 0,
+        "whole_tumor": [
+            1,
+            2,
+            3
+        ],
+        "tumor_core": [
+            2,
+            3
+        ],
+        "enhancing_tumor": [
+            3
+        ]
+    },
+    "regions_class_order": [
+        1,
+        2,
+        3
+    ],
+    "numTraining": 461,
+    "file_ending": ".nii.gz"
+}
