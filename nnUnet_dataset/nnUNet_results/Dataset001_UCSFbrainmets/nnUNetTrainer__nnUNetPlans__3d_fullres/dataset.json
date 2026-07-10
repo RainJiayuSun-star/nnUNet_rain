@@ -5,10 +5,9 @@
     },
     "labels": {
         "background": 0,
-        "label_1": 1,
-        "label_2": 2,
-        "label_3": 3
+        "tumor_core": 1,
+        "edema": 2
     },
-    "numTraining": 461,
+    "numTraining": 324,
     "file_ending": ".nii.gz"
 }
