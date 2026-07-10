@@ -24,6 +24,31 @@ def get_cluster_job_id():
     return job_id
 
 
+def _should_init_wandb_for_current_process() -> bool:
+    """Return True for the process that should initialize W&B logging.
+
+    In multi-GPU training, nnU-Net spawns one process per GPU. We only want
+    the rank-zero process to create a single W&B run to avoid duplicate runs.
+    """
+    try:
+        import torch.distributed as dist
+    except Exception:
+        return True
+
+    if dist.is_available():
+        if dist.is_initialized():
+            return dist.get_rank() == 0
+
+        rank_env = os.getenv("RANK") or os.getenv("LOCAL_RANK")
+        if rank_env is not None:
+            try:
+                return int(rank_env) == 0
+            except ValueError:
+                pass
+
+    return True
+
+
 class MetaLogger(object):
     """A meta logger that bundles multiple loggers behind a single interface.
 
@@ -43,16 +68,8 @@ class MetaLogger(object):
         self.resume = resume
         self.loggers = []
         self.local_logger = LocalLogger(verbose)
-        if self._is_logger_enabled("nnUNet_wandb_enabled"):
-            # Only initialize WandbLogger on Rank 0 in multi-GPU training to prevent duplicate runs
-            try:
-                import torch.distributed as dist
-                if dist.is_available() and dist.is_initialized() and dist.get_rank() != 0:
-                    pass
-                else:
-                    self.loggers.append(WandbLogger(output_folder, resume))
-            except Exception:
-                self.loggers.append(WandbLogger(output_folder, resume))
+        if self._is_logger_enabled("nnUNet_wandb_enabled") and _should_init_wandb_for_current_process():
+            self.loggers.append(WandbLogger(output_folder, resume))
 
     def update_config(self, config: dict):
         """Add a new or update an existing experiment configuration to the logger.
