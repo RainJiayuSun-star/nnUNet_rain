@@ -26,13 +26,13 @@
         "2d": {
             "data_identifier": "nnUNetPlans_2d",
             "preprocessor_name": "DefaultPreprocessor",
-            "batch_size": 90,
+            "batch_size": 91,
             "patch_size": [
                 224,
                 160
             ],
             "median_image_size_in_voxels": [
-                202.0,
+                201.0,
                 160.0
             ],
             "spacing": [
@@ -181,7 +181,7 @@
             ],
             "median_image_size_in_voxels": [
                 91.0,
-                202.0,
+                201.0,
                 160.0
             ],
             "spacing": [
@@ -337,22 +337,22 @@
     "label_manager": "LabelManager",
     "foreground_intensity_properties_per_channel": {
         "0": {
-            "max": 35582.1796875,
-            "mean": 4289.12158203125,
-            "median": 3813.17919921875,
+            "max": 37690.75390625,
+            "mean": 4357.39013671875,
+            "median": 3872.285888671875,
             "min": 0.0,
-            "percentile_00_5": 1220.025390625,
-            "percentile_99_5": 11691.853515625,
-            "std": 2134.19873046875
+            "percentile_00_5": 1495.705810546875,
+            "percentile_99_5": 11712.201171875,
+            "std": 2136.03759765625
         },
         "1": {
-            "max": 6098557.5,
-            "mean": 285216.71875,
-            "median": 2660.2763671875,
+            "max": 5266255.5,
+            "mean": 244702.515625,
+            "median": 2500.922119140625,
             "min": 0.0,
-            "percentile_00_5": 179.8603515625,
-            "percentile_99_5": 2639688.25,
-            "std": 551784.625
+            "percentile_00_5": 134.08425903320312,
+            "percentile_99_5": 2264960.751249913,
+            "std": 459222.5
         }
     }
 }
