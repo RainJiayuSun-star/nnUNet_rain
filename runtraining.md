@@ -1,14 +1,14 @@
 # nnU-Net Pipeline Execution Guide (Server)
 
 This guide provides the exact Docker commands required to execute the full nnU-Net pipeline on the lab virtual machine. All commands use the server's specific volume mount path:
-`/mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset`
+`/mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset`
 
 ## 1. Verify Dataset Integrity
 Before running the heavy preprocessing, it is best practice to quickly check that your dataset is formatted correctly and free of corruption. This extracts the fingerprint without doing the resampling.
 
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_extract_fingerprint -d 1 --verify_dataset_integrity"
 ```
 
@@ -16,8 +16,8 @@ docker run --gpus all -it --rm \
 Once integrity is verified, execute the heavy preprocessing. This will calculate the experiment plans, crop the images, standardize the spacing, and apply z-score normalization. The results are saved to `nnUNet_preprocessed/`.
 
 ```bash
-docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+docker run --runtime=nvidia -it --rm \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_plan_and_preprocess -d 1 --verify_dataset_integrity"
 ```
 
@@ -27,8 +27,36 @@ docker run --gpus all -it --rm \
 To train the default single-stage `3d_fullres` model (e.g., using GPUs 0 and 1):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1 docker run --gpus all -it --rm --shm-size=32g \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -num_gpus 2"
+```
+
+To Run 5 folds Training using the setting above + wandb
+```bash
+for fold in 0 1 2 3 4; do
+    echo "=== Training Fold $fold sequentially using 2 GPUs ==="
+    docker run --runtime=nvidia -it --rm --shm-size=32g \
+        -e NVIDIA_VISIBLE_DEVICES=0,1 \
+        -e CUDA_VISIBLE_DEVICES=0,1 \
+        --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+        nnunet-rain "nnUNetv2_train 1 3d_fullres $fold -num_gpus 2"
+done
+```
+
+Temp:
+```bash
+for fold in 0 1 2; do
+    echo "=== Training Fold $fold sequentially using 2 GPUs ==="
+    docker run --runtime=nvidia -it --rm --shm-size=32g \
+        -e NVIDIA_VISIBLE_DEVICES=0,1 \
+        -e CUDA_VISIBLE_DEVICES=0,1 \
+        --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+        nnunet-rain "nnUNetv2_train 1 3d_fullres $fold -num_gpus 2"
+done
 ```
 
 ### Option B: Residual Encoder Configuration (Recommended for L40S/High VRAM)
@@ -38,7 +66,7 @@ If the default configuration plateaus, you can train a model using residual bloc
 Run the experiment planner using the large preset:
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_plan_experiment -d 1 -pl nnUNetPlannerResEncL"
 ```
 
@@ -46,7 +74,7 @@ docker run --gpus all -it --rm \
 Train the model by referencing the newly generated plans (`nnUNetResEncUNetLPlans`):
 ```bash
 CUDA_VISIBLE_DEVICES=2 docker run --gpus all -it --rm --shm-size=32g \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans -num_gpus 1"
 ```
 
@@ -57,7 +85,7 @@ For highly optimized training using custom spatial dropout, scaled batch size, A
 Since the configuration (such as batch size and dropout) in the custom plans file `nnUNetResEncUNetLPlans_custom_0624.json` has been updated, you must run preprocessing for this specific plans file first:
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_preprocess -d 1 -c 3d_fullres -plans nnUNetResEncUNetLPlans_custom_0624"
 ```
 
@@ -68,8 +96,8 @@ Since the container's python environment is installed in editable mode from the 
 By adding `-v .../train/nnUNet_rain:/opt/nnunet`, any updates you make to the trainer python files on the host are immediately reflected inside the running container without needing a rebuild:
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
 ```
 *(If you are running on 2 GPUs, adjust `CUDA_VISIBLE_DEVICES=1,2` and `-num_gpus 2` accordingly)*
@@ -82,8 +110,32 @@ docker build -t nnunet-rain .
 After building, you can run training without mounting the code directory:
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
+```
+
+### Option D: Standard 2D Training
+To train the default single-stage `2d` model:
+
+#### Single Fold (e.g., Fold 0) using 2 GPUs
+```bash
+CUDA_VISIBLE_DEVICES=0,1 docker run --gpus all -it --rm --shm-size=32g \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  nnunet-rain "nnUNetv2_train 1 2d 0 -num_gpus 2"
+```
+
+#### Run 5 Folds Training sequentially using 2 GPUs + wandb
+```bash
+for fold in 0 1 2 3 4; do
+    echo "=== Training Fold $fold (2D) sequentially using 2 GPUs ==="
+    docker run --runtime=nvidia -it --rm --shm-size=32g \
+        -e NVIDIA_VISIBLE_DEVICES=2,3 \
+        -e CUDA_VISIBLE_DEVICES=0,1 \
+        --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+        nnunet-rain "nnUNetv2_train 1 2d $fold -num_gpus 2"
+done
 ```
 
 ## 4. Weights & Biases (W&B) Logging
@@ -110,8 +162,8 @@ For example, when running custom training with the code mounted (Method A):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
   --env-file .env \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets -num_gpus 4"
 ```
 
@@ -123,7 +175,7 @@ After training is complete, you can generate predictions on new, unseen data. Yo
 ### Standard Full-Resolution Inference
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   -v /path/to/server/input_scans:/workspace/input \
   -v /path/to/server/output_predictions:/workspace/output \
   nnunet-rain "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 1 -c 3d_fullres -f 0"
@@ -133,7 +185,7 @@ docker run --gpus all -it --rm \
 If you trained using the Residual Encoder plan, you must pass the matching plan name to the predictor:
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
   -v /path/to/server/input_scans:/workspace/input \
   -v /path/to/server/output_predictions:/workspace/output \
   nnunet-rain "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 1 -c 3d_fullres -f 0 -p nnUNetResEncUNetLPlans"
@@ -143,8 +195,8 @@ docker run --gpus all -it --rm \
 If you trained using the custom plans and custom trainer:
 ```bash
 docker run --gpus all -it --rm \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   -v /path/to/server/input_scans:/workspace/input \
   -v /path/to/server/output_predictions:/workspace/output \
   nnunet-rain "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 1 -c 3d_fullres -f 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMets"
@@ -212,23 +264,23 @@ sequenceDiagram
 
 ### Running the Pipeline Options
 
-#### Option D: Configurable Training (Single Run)
+#### Option 1: Configurable Training (Single Run)
 If you want to run a single manual training session, edit `train_config.yaml` to configure your values, and execute:
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
   --env-file .env \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   nnunet-rain "cd /opt/nnunet && nnUNetv2_train 1 3d_fullres 0 -p nnUNetResEncUNetLPlans_custom_0624 -tr nnUNetTrainerMetsConfigurable -num_gpus 4"
 ```
 
-#### Option E: Automated Multi-Experiment Pipeline Execution (Sweeps)
+#### Option 2: Automated Multi-Experiment Pipeline Execution (Sweeps)
 To run a batch of sequential configurations (as defined in `run_experiments_pipeline.sh`):
 ```bash
 CUDA_VISIBLE_DEVICES=0,1,2,3 docker run --gpus all -it --rm --shm-size=32g \
   --env-file .env \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
-  -v /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
   nnunet-rain "cd /opt/nnunet && chmod +x run_experiments_pipeline.sh && ./run_experiments_pipeline.sh"
 ```
 Once complete, you can review the results of all configurations side-by-side in:
