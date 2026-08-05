@@ -1,0 +1,12 @@
+# configs/exp_focal_tversky_beta0.8_gamma1.50.yaml
+experiment_name: "ftl_beta0.8_gamma1.50"
+optimizer: "AdamW"
+initial_lr: 0.0003
+weight_decay: 0.0001
+num_epochs: 500
+loss_type: "compound_focal_tversky"
+ftl_alpha: 0.2
+ftl_beta: 0.8
+ftl_gamma: 1.50
+ftl_w_ce: 1.0
+ftl_w_ftl: 1.0
