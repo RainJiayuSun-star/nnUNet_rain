@@ -47,16 +47,27 @@ done
 
 Temp:
 ```bash
-for fold in 0 1 2; do
+for fold in 4; do
     echo "=== Training Fold $fold sequentially using 2 GPUs ==="
     docker run --runtime=nvidia -it --rm --shm-size=32g \
-        -e NVIDIA_VISIBLE_DEVICES=0,1 \
+        -e NVIDIA_VISIBLE_DEVICES=2,3 \
         -e CUDA_VISIBLE_DEVICES=0,1 \
         --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
         -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
         -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
         nnunet-rain "nnUNetv2_train 1 3d_fullres $fold -num_gpus 2"
 done
+```
+
+Temp2:
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 2 3d_fullres 1 -num_gpus 2 -tr nnUNetTrainerDA5"
 ```
 
 ### Option B: Residual Encoder Configuration (Recommended for L40S/High VRAM)
@@ -124,6 +135,17 @@ CUDA_VISIBLE_DEVICES=0,1 docker run --gpus all -it --rm --shm-size=32g \
   nnunet-rain "nnUNetv2_train 1 2d 0 -num_gpus 2"
 ```
 
+Using updated correct command
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=2 \
+    -e CUDA_VISIBLE_DEVICES=0 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 2d 4 -tr nnUNetTrainerDA5"
+```
+
 #### Run 5 Folds Training sequentially using 2 GPUs + wandb
 ```bash
 for fold in 0 1 2 3 4; do
@@ -137,6 +159,97 @@ for fold in 0 1 2 3 4; do
         nnunet-rain "nnUNetv2_train 1 2d $fold -num_gpus 2"
 done
 ```
+
+### Option E: Advanced Data Augmentation (nnUNetTrainerDA5)
+If you want to train a standard 3D full-resolution model with advanced data augmentations (such as MRI bias fields/gradient simulations, coarse cutout, local contrast, and sharpness changes) to prevent overfitting and improve generalization on scanner anomalies:
+
+#### Single Fold (e.g. Fold 0) using 2 GPUs
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 3d_fullres 2 -num_gpus 2 -tr nnUNetTrainerDA5"
+```
+
+#### Run 5 Folds sequentially using 2 GPUs + wandb
+```bash
+for fold in 0 1 2 3 4; do
+    echo "=== Training Fold $fold sequentially with DA5 using 2 GPUs ==="
+    docker run --runtime=nvidia -it --rm --shm-size=32g \
+        -e NVIDIA_VISIBLE_DEVICES=0,1 \
+        -e CUDA_VISIBLE_DEVICES=0,1 \
+        --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+        nnunet-rain "nnUNetv2_train 1 3d_fullres $fold -num_gpus 2 -tr nnUNetTrainerDA5"
+done
+```
+*(Make sure to mount the code directory `-v ...:/opt/nnunet` so the container can resolve the `nnUNetTrainerDA5` python class files.)*
+
+### Option F: Focal Tversky Loss Training (Small Lesion Optimization)
+
+To improve detection sensitivity on small brain metastases (<0.05 cc / <10 voxels) and reduce spatial boundary distance errors, Focal Tversky Loss can be used with either **standard data augmentation (fast training)** or **DA5 spatial data augmentation**.
+
+#### Option F1: Standard Fast Training (Recommended for Fast Iteration)
+
+##### A. Compound Focal Tversky (`nnUNetTrainer_CompoundFocalTversky`)
+Standard data augmentation speed + $1.0\times\text{CE} + 1.0\times\text{FTL}$ ($\alpha=0.3, \beta=0.7, \gamma=1.33$).
+
+```bash
+# Fold 0 using 2 GPUs
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -num_gpus 2 -tr nnUNetTrainer_CompoundFocalTversky"
+```
+
+##### B. Pure Focal Tversky (`nnUNetTrainer_PureFocalTversky`)
+Standard data augmentation speed + Pure Focal Tversky Loss without CE ($\alpha=0.3, \beta=0.7, \gamma=1.33$).
+
+```bash
+# Fold 0 using 2 GPUs
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=2,3 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -num_gpus 2 -tr nnUNetTrainer_PureFocalTversky"
+```
+
+---
+
+#### Option F2: Advanced Spatial Augmentation Training (DA5)
+
+##### A. Compound Focal Tversky with DA5 (`nnUNetTrainerDA5_CompoundFocalTversky`)
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -num_gpus 2 -tr nnUNetTrainerDA5_CompoundFocalTversky"
+```
+
+##### B. Pure Focal Tversky with DA5 (`nnUNetTrainerDA5_PureFocalTversky`)
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    nnunet-rain "nnUNetv2_train 1 3d_fullres 0 -num_gpus 2 -tr nnUNetTrainerDA5_PureFocalTversky"
+```
+
+---
 
 ## 4. Weights & Biases (W&B) Logging
 

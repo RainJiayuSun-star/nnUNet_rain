@@ -38,6 +38,14 @@ docker run --runtime=nvidia -it --rm \
 ```
 *(Replace `/path/to/server/input_scans` and `/path/to/server/output_predictions` with your actual directory paths on the server).*
 
+```bash
+docker run --runtime=nvidia -it --rm \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /path/to/server/input_scans:/workspace/input \
+  -v /path/to/server/output_predictions:/workspace/output \
+  nnunet-rain "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 1 -c 3d_fullres -tr nnUNetTrainerDA5 -o nnUNetPlans"
+```
+
 ---
 
 ### Option B: Standard 2D Model 5-Fold Ensemble
@@ -80,6 +88,26 @@ docker run --runtime=nvidia -it --rm \
 
 ---
 
+### Option E: Running Validation-Only on a Trained Fold (No Retraining)
+If you already have checkpoints (`checkpoint_best.pth` / `checkpoint_final.pth`) on the server and want to re-run the validation metrics (e.g. if the validation split was updated, or you need to re-generate the `summary.json` file):
+
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  nnunet-rain "nnUNetv2_train 1 3d_fullres 0 --val --val_best"
+```
+*(Specify the dataset ID, configuration name, and fold number. The `--val` flag tells nnU-Net to skip training and only validate, and `--val_best` ensures it uses the best checkpoint weights).*
+
+Running Validation-Only on nnUNetTraingerDA5_OS50 For example (on fold 4):
+```
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+  nnunet-rain "nnUNetv2_train 1 3d_fullres 4 --val --val_best -tr nnUNetTrainerDA5_OS50"
+```
+
+---
+
 ## 3. How to View the Segmentation Outputs
 Once prediction finishes, your output folder on the server will contain `.nii.gz` files with the same names as the input scans (e.g., `100101A.nii.gz`).
 
@@ -93,3 +121,32 @@ To visualize the predicted labels overlayed on the structural scans:
    * **3D Slicer:**
      1. Drag and drop both the T1post image and the segmentation mask into the workspace.
      2. Set the segmentation mask volume as an overlay using the **Segmentations** module.
+
+---
+
+## 4. Evaluating Predictions against Ground Truth
+If you have ground-truth segmentations for your test files and want to calculate the overlap metrics (Dice, IoU, TP, FP, FN, TN), you can compare your prediction outputs with the ground truth folder.
+
+### Running Folder Evaluation
+Use `nnUNetv2_evaluate_folder` to compare directories:
+
+```bash
+docker run -it --rm \
+  -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+  -v /path/to/server/ground_truth_labels:/workspace/gt \
+  -v /path/to/server/output_predictions:/workspace/output \
+  nnunet-rain "nnUNetv2_evaluate_folder /workspace/gt /workspace/output \
+    -djfile /workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainer__nnUNetPlans__3d_fullres/dataset.json \
+    -pfile /workspace/nnunet_data/nnUNet_results/Dataset001_UCSFbrainmets/nnUNetTrainer__nnUNetPlans__3d_fullres/plans.json"
+```
+*(Replace `/path/to/server/ground_truth_labels` and `/path/to/server/output_predictions` with your actual host paths).*
+
+### Evaluating a Subset of the Dataset
+If your prediction folder contains only a **subset** of the patients present in the ground-truth folder (for example, you predicted on 10 patients, but the ground-truth folder has all 100):
+* **By default**, the command will crash if the prediction folder doesn't have a corresponding file for every file in the ground-truth folder.
+* **To bypass this**, add the **`--chill`** flag to the end of your command string inside the container:
+
+```bash
+nnUNetv2_evaluate_folder /workspace/gt /workspace/output -djfile ... -pfile ... --chill
+```
+When `--chill` is used, the script will only evaluate the cases found in your prediction folder and skip the rest without crashing. Output metrics will be saved in `summary.json` inside your output predictions folder.
