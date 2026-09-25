@@ -1,288 +1,232 @@
-import java.io.BufferedWriter;
 import java.io.IOException;
-import java.nio.file.FileVisitResult;
-import java.nio.file.FileVisitor;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.nio.file.SimpleFileVisitor;
-import java.nio.file.StandardCopyOption;
+import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.EnumMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
+import java.util.*;
 
-/**
- * Reformat UCSF Brain Mets data into nnU-Net raw dataset layout.
- *
- * Output naming (we preserve only FLAIR and T1post):
- * - imagesTr/UCSFbrainmets_[xxx]_0000.nii.gz (FLAIR)
- * - imagesTr/UCSFbrainmets_[xxx]_0001.nii.gz (T1post)
- * - labelsTr/UCSFbrainmets_[xxx].nii.gz      (BraTS-seg label)
- *
- * Usage:
- *   java reformat [sourceRoot] [targetDatasetRoot]
- *
- * Defaults:
- * - sourceRoot:
- *   /mnt/local/data/rainsun/metastases/datasets_preprocessed/UCSF_BrainMetastases_TRAIN
- * - targetDatasetRoot:
- *   /mnt/local/data/rainsun/metastases/Rain-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset/nnUnet_raw/Dataset001_UCSFbrainmets
- *
- * The program also writes renaming_map.csv in targetDatasetRoot:
- *   SubjectID,nnUNet_case_id,FLAIR,T1post,Label
- */
+/** Java 21: java reformat.java [sourceRoot] [targetDatasetRoot] [cohortCsv] [--dry-run]. */
 public class reformat {
-
-    // Default raw UCSF source folder (can be overridden via args[0]).
-        private static final String DEFAULT_SOURCE_ROOT =
-            "/app/datasets_preprocessed/UCSF_BrainMetastases_TRAIN";
-        // Default nnU-Net dataset target root (can be overridden via args[1]).
-        private static final String DEFAULT_TARGET_DATASET_ROOT =
-            "/app/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset/nnUNet_raw/Dataset003_UCSFbrainmets_222";
-
-    // Prefix used for generated nnU-Net case IDs.
-    private static final String CASE_PREFIX = "UCSFbrainmets";
-
-    // Maps source filename suffixes (case-insensitive) to nnUnet channel IDs.
-    private enum Modality {
-        FLAIR(new String[]{"flair", "flair_bc"}, "0000"),
-        // Accept both t1post and t1ce as the post-contrast structural scan; include _BC variants
-        T1POST(new String[]{"t1post", "t1post_bc", "t1ce", "t1ce_bc"}, "0001");
-
-        final String[] sourceSuffixes; // lower-case suffixes
-        final String nnUnetCode;
-
-        Modality(String[] sourceSuffixes, String nnUnetCode) {
-            this.sourceSuffixes = sourceSuffixes;
-            this.nnUnetCode = nnUnetCode;
+    private static final String DEFAULT_SOURCE_ROOT =
+        "/app/datasets_preprocessed/UCSF_BrainMetastases_TRAIN";
+    private static final String DEFAULT_TARGET_DATASET_ROOT =
+        "/app/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset/nnUNet_raw/Dataset003_UCSFbrainmets_222";
+    private static final String COHORT_FILE = "ucsf_scan_A_preoperative_brats_training_222.csv";
+    private static final int EXPECTED_CASES = 222;
+    private static final List<String> MAP_HEADER = List.of("SubjectID", "nnUNet_case_id", "FLAIR", "T1post", "Label", "patient_id", "brats_id");
+    private static final String DATASET_JSON = """
+        {
+          "channel_names": {"0": "FLAIR", "1": "T1post"},
+          "labels": {"background": 0, "tumor_core": 1, "edema": 2},
+          "numTraining": 222,
+          "file_ending": ".nii.gz"
         }
-        String displayName() { return sourceSuffixes[0]; }
+        """;
+    private record Patient(String id, String subject, String brats) {}
+    private record Copy(Path source, Path target) {}
+
+    public static void main(String[] args) {
+        try { run(args); }
+        catch (IOException | IllegalArgumentException e) {
+            System.err.println("Reformat failed: " + e.getMessage());
+            System.exit(1);
+        }
     }
 
-    // Only accept the requested segmentation file name format:
-    // {SubjectID}_combined.seg.nii.gz
-    private static final String LABEL_SUFFIX = "_combined.seg.nii.gz";
-
-    // Holds discovered paths for one SubjectID.
-    private static class CaseFiles {
-        final Map<Modality, Path> modalities = new EnumMap<>(Modality.class);
-        Path label;
-    }
-
-    public static void main(String[] args) throws IOException {
-        // Resolve source/target roots from args or defaults.
-        Path sourceRoot = args.length > 0 ? Paths.get(args[0]) : Paths.get(DEFAULT_SOURCE_ROOT);
-        Path targetDatasetRoot = args.length > 1 ? Paths.get(args[1]) : Paths.get(DEFAULT_TARGET_DATASET_ROOT);
-        Path imagesTr = targetDatasetRoot.resolve("imagesTr");
-        Path labelsTr = targetDatasetRoot.resolve("labelsTr");
-
-        // Fail fast if source root is invalid.
-        if (!Files.isDirectory(sourceRoot)) {
-            throw new IOException("Source root does not exist or is not a directory: " + sourceRoot);
+    private static void run(String[] args) throws IOException {
+        List<String> positional = new ArrayList<>();
+        boolean dry = false;
+        for (String arg : args) {
+            if (arg.equals("--dry-run")) dry = true;
+            else if (arg.startsWith("--")) throw new IOException("Unknown option: " + arg);
+            else positional.add(arg);
         }
-
-        // Ensure nnU-Net required folders exist.
-        Files.createDirectories(imagesTr);
-        Files.createDirectories(labelsTr);
-        System.out.println("Starting UCSF -> nnU-Net reformat");
-        System.out.println("Source root: " + sourceRoot);
-        System.out.println("Target dataset root: " + targetDatasetRoot);
-        System.out.println("Target imagesTr: " + imagesTr);
-        System.out.println("Target labelsTr: " + labelsTr);
-        System.out.println("Scanning source files...");
-
-        // Discover all candidate cases by parsing source filenames.
-        Map<String, CaseFiles> discovered = discoverCases(sourceRoot);
-        List<String> subjects = new ArrayList<>(discovered.keySet());
-        Collections.sort(subjects);
-        System.out.println("Discovered candidate SubjectIDs: " + subjects.size());
-        System.out.println("Beginning copy/organize phase...");
-
-        int copiedCases = 0;
-        int skippedCases = 0;
-        int skippedMissingLabel = 0;
-        List<String> skipped = new ArrayList<>();
-        List<String> skippedNoLabel = new ArrayList<>();
-        List<String[]> mappingRows = new ArrayList<>();
-
-        int debugPrinted = 0;
-        for (String subjectId : subjects) {
-            CaseFiles cf = discovered.get(subjectId);
-            if (debugPrinted < 10) {
-                System.out.println("[DBG] SubjectID=" + subjectId + " modalities=" + cf.modalities.keySet() + " label=" + (cf.label != null));
-                debugPrinted++;
-            }
-            // Explicitly exclude cases without BraTS segmentation labels.
-            if (cf == null || cf.label == null) {
-                skippedCases++;
-                skippedMissingLabel++;
-                skippedNoLabel.add(subjectId);
-                System.out.println("[SKIP][NO_LABEL] SubjectID=" + subjectId + " (missing _combined.seg.nii.gz)");
-                continue;
-            }
-            if (!isCompleteCase(cf)) {
-                skippedCases++;
-                skipped.add(subjectId);
-                System.out.println("[SKIP][INCOMPLETE] SubjectID=" + subjectId + " (missing modality file)");
-                continue;
-            }
-
-            // Assign contiguous nnU-Net case IDs only to included cases.
-            String nnCaseId = String.format(Locale.ROOT, "%s_%03d", CASE_PREFIX, copiedCases);
-            System.out.println("[COPY] SubjectID=" + subjectId + " -> " + nnCaseId);
-
-            // Copy all modality channels to imagesTr with nnU-Net channel suffixes.
-            for (Modality m : Modality.values()) {
-                Path src = cf.modalities.get(m);
-                Path dst = imagesTr.resolve(nnCaseId + "_" + m.nnUnetCode + ".nii.gz");
-                copyFile(src, dst);
-                System.out.println("  [IMG] " + m.displayName() + " -> " + dst.getFileName());
-            }
-            // Copy segmentation label to labelsTr with case-only filename.
-            Path dstLabel = labelsTr.resolve(nnCaseId + ".nii.gz");
-            copyFile(cf.label, dstLabel);
-            System.out.println("  [LBL] combined.seg -> " + dstLabel.getFileName());
-
-                // Record traceability row: original SubjectID -> generated nnU-Net case ID.
-                mappingRows.add(new String[] {
-                    subjectId,
-                    nnCaseId,
-                    cf.modalities.get(Modality.FLAIR).toString(),
-                    cf.modalities.get(Modality.T1POST).toString(),
-                    cf.label.toString()
-                });
-
-            copiedCases++;
-            System.out.println("  [DONE] " + nnCaseId);
-        }
-
-        Path mappingCsv = targetDatasetRoot.resolve("renaming_map.csv");
-        writeMappingCsv(mappingCsv, mappingRows);
-        // Generate minimal nnU-Net v2 dataset.json metadata.
-        writeDatasetJson(targetDatasetRoot.resolve("dataset.json"), copiedCases);
-
-        System.out.println("Done.");
-        System.out.println("Source root: " + sourceRoot);
-        System.out.println("Target dataset root: " + targetDatasetRoot);
-        System.out.println("Copied complete cases: " + copiedCases);
-        System.out.println("Skipped incomplete cases: " + skippedCases);
-        System.out.println("Skipped due to missing combined.seg label: " + skippedMissingLabel);
-        if (!skipped.isEmpty()) {
-            System.out.println("Skipped SubjectIDs (missing modality/label):");
-            for (String sid : skipped) {
-                System.out.println("  - " + sid);
-            }
-        }
-        if (!skippedNoLabel.isEmpty()) {
-            System.out.println("Skipped SubjectIDs (missing combined.seg):");
-            for (String sid : skippedNoLabel) {
-                System.out.println("  - " + sid);
-            }
-        }
-        System.out.println("Mapping file: " + mappingCsv);
-        System.out.println("dataset.json: " + targetDatasetRoot.resolve("dataset.json"));
-    }
-
-    private static Map<String, CaseFiles> discoverCases(Path sourceRoot) throws IOException {
-        // SubjectID -> discovered modality/label files.
-        Map<String, CaseFiles> bySubject = new LinkedHashMap<>();
-
-        FileVisitor<Path> visitor = new SimpleFileVisitor<>() {
-            @Override
-            public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+        if (positional.size() > 3) throw new IOException("Usage: java reformat.java [sourceRoot] [targetDatasetRoot] [cohortCsv] [--dry-run]");
+        Path source = Path.of(positional.size() > 0 ? positional.get(0) : DEFAULT_SOURCE_ROOT).toRealPath();
+        Path target = Path.of(positional.size() > 1 ? positional.get(1) : DEFAULT_TARGET_DATASET_ROOT).toAbsolutePath().normalize();
+        if (!Files.isDirectory(source)) throw new IOException("Not a source directory: " + source);
+        Path resolvedTarget = resolveExistingParent(target);
+        if (resolvedTarget.startsWith(source) || source.startsWith(resolvedTarget))
+            throw new IOException("Source and target directories must not overlap.");
+        Path cohort = positional.size() > 2 ? Path.of(positional.get(2)) : target.resolve(COHORT_FILE);
+        List<Patient> patients = readCohort(cohort);
+        Map<String, List<Path>[]> files = new TreeMap<>();
+        for (Patient p : patients) files.put(p.subject(), newLists());
+        // Recursively inspect filenames, but retain candidates only for allowlisted examinations.
+        Files.walkFileTree(source, new SimpleFileVisitor<Path>() {
+            @Override public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
                 String name = file.getFileName().toString();
-                if (!name.endsWith(".nii.gz")) {
-                    return FileVisitResult.CONTINUE;
-                }
-
-                String nameLower = name.toLowerCase(Locale.ROOT);
-                for (Modality m : Modality.values()) {
-                    for (String sfx : m.sourceSuffixes) {
-                        String suffix = "_" + sfx + ".nii.gz";
-                        if (nameLower.endsWith(suffix)) {
-                            // Source modality filename format: {SubjectID}_{Modality}.nii.gz
-                            String subjectId = name.substring(0, name.length() - suffix.length());
-                            CaseFiles cf = bySubject.computeIfAbsent(subjectId, k -> new CaseFiles());
-                            cf.modalities.put(m, file);
-                            return FileVisitResult.CONTINUE;
-                        }
-                    }
-                }
-
-                if (nameLower.endsWith(LABEL_SUFFIX)) {
-                    // Source label filename format: {SubjectID}_combined.seg.nii.gz
-                    String subjectId = name.substring(0, name.length() - LABEL_SUFFIX.length());
-                    CaseFiles cf = bySubject.computeIfAbsent(subjectId, k -> new CaseFiles());
-                    cf.label = file;
-                }
+                int underscore = name.indexOf('_');
+                if (underscore < 0) return FileVisitResult.CONTINUE;
+                List<Path>[] matches = files.get(name.substring(0, underscore));
+                if (matches == null) return FileVisitResult.CONTINUE;
+                String suffix = name.substring(underscore).toLowerCase(Locale.ROOT);
+                int channel = switch (suffix) {
+                    case "_flair.nii.gz", "_flair_bc.nii.gz" -> 0;
+                    case "_t1post.nii.gz", "_t1post_bc.nii.gz", "_t1ce.nii.gz", "_t1ce_bc.nii.gz" -> 1;
+                    case "_combined.seg.nii.gz" -> 2;
+                    default -> -1;
+                };
+                if (channel >= 0) matches[channel].add(file);
                 return FileVisitResult.CONTINUE;
             }
-        };
-
-        Files.walkFileTree(sourceRoot, visitor);
-        return bySubject;
-    }
-
-    private static boolean isCompleteCase(CaseFiles cf) {
-        // A valid case requires one label and all configured modalities.
-        if (cf == null || cf.label == null) {
-            return false;
-        }
-        for (Modality m : Modality.values()) {
-            if (!cf.modalities.containsKey(m)) {
-                return false;
+        });
+        List<String> errors = new ArrayList<>();
+        String[] names = {"FLAIR", "T1post", "combined.seg"};
+        for (Patient p : patients) {
+            List<Path>[] matches = files.get(p.subject());
+            for (int i = 0; i < 3; i++) {
+                if (matches[i].size() != 1) errors.add(p.subject() + " " + names[i] + ": expected one file; found " + matches[i]);
+                else if (!Files.isRegularFile(matches[i].get(0)) || Files.size(matches[i].get(0)) == 0)
+                    errors.add(p.subject() + " " + names[i] + ": empty or not a regular file: " + matches[i].get(0));
             }
         }
-        return true;
-    }
-
-    private static void copyFile(Path src, Path dst) throws IOException {
-        // Overwrite existing target files to support reruns.
-        Files.createDirectories(dst.getParent());
-        Files.copy(src, dst, StandardCopyOption.REPLACE_EXISTING);
-    }
-
-    private static void writeMappingCsv(Path outputCsv, List<String[]> rows) throws IOException {
-        // CSV provides auditable mapping from original file IDs to new nnU-Net IDs.
-        try (BufferedWriter writer = Files.newBufferedWriter(outputCsv)) {
-            writer.write("SubjectID,nnUNet_case_id,FLAIR,T1post,Label");
-            writer.newLine();
-            for (String[] row : rows) {
-                writer.write(csv(row[0]) + "," + csv(row[1]) + "," + csv(row[2]) + "," + csv(row[3]) + ","
-                        + csv(row[4]));
-                writer.newLine();
+        if (!errors.isEmpty()) throw new IOException("Source preflight failed before copying:\n" + String.join("\n", errors));
+        List<List<String>> mapping = new ArrayList<>();
+        mapping.add(MAP_HEADER);
+        List<Copy> copies = new ArrayList<>();
+        for (int i = 0; i < patients.size(); i++) {
+            Patient p = patients.get(i);
+            String caseId = String.format(Locale.ROOT, "UCSFbrainmets_%03d", i);
+            List<Path>[] paths = files.get(p.subject());
+            Path flair = paths[0].get(0), t1 = paths[1].get(0), label = paths[2].get(0);
+            copies.add(new Copy(flair, target.resolve("imagesTr/" + caseId + "_0000.nii.gz")));
+            copies.add(new Copy(t1, target.resolve("imagesTr/" + caseId + "_0001.nii.gz")));
+            copies.add(new Copy(label, target.resolve("labelsTr/" + caseId + ".nii.gz")));
+            mapping.add(List.of(p.subject(), caseId, flair.toString(), t1.toString(), label.toString(), p.id(), p.brats()));
+        }
+        validateTarget(target, copies, mapping);
+        System.out.println("Source: " + source + "\nTarget: " + target + "\nCohort: " + cohort.toAbsolutePath());
+        System.out.println("Validated 222 patients: 444 images, 222 combined labels; FLAIR=0000, T1post=0001.");
+        if (dry) { System.out.println("Dry run complete; no files written."); return; }
+        Files.createDirectories(target.resolve("imagesTr"));
+        Files.createDirectories(target.resolve("labelsTr"));
+        // Save the validated identity mapping first, so interrupted copies can be resumed safely.
+        writeAtomic(target.resolve("renaming_map.csv"), toCsv(mapping));
+        for (Copy copy : copies) {
+            if (!Files.exists(copy.target())) {
+                Path tmp = Files.createTempFile(target, ".reformat-copy-", ".tmp");
+                try {
+                    Files.copy(copy.source(), tmp, StandardCopyOption.REPLACE_EXISTING);
+                    Files.move(tmp, copy.target(), StandardCopyOption.ATOMIC_MOVE);
+                } finally { Files.deleteIfExists(tmp); }
             }
         }
+        writeAtomic(target.resolve("dataset.json"), DATASET_JSON);
+        validateTarget(target, copies, mapping);
+        for (Copy copy : copies) if (!Files.isRegularFile(copy.target())) throw new IOException("Missing output: " + copy.target());
+        System.out.println("Complete: 222 cases; renaming_map.csv and dataset.json written. No cases skipped.");
     }
 
-    private static String csv(String s) {
-        if (s == null) {
-            return "";
+    private static Path resolveExistingParent(Path path) throws IOException {
+        if (Files.exists(path)) return path.toRealPath();
+        return resolveExistingParent(path.getParent()).resolve(path.getFileName());
+    }
+
+    @SuppressWarnings("unchecked")
+    private static List<Path>[] newLists() {
+        return (List<Path>[]) new List<?>[]{new ArrayList<Path>(), new ArrayList<Path>(), new ArrayList<Path>()};
+    }
+
+    private static List<Patient> readCohort(Path path) throws IOException {
+        List<List<String>> rows = readCsv(path);
+        List<String> header = rows.get(0);
+        for (String field : List.of("patient_id", "subject_id", "brats_id", "scan_letter", "prior_craniotomy_biopsy_resection"))
+            if (!header.contains(field)) throw new IOException("Cohort missing column: " + field);
+        List<Patient> patients = new ArrayList<>();
+        Set<String> ids = new HashSet<>(), subjects = new HashSet<>(), bratsIds = new HashSet<>();
+        for (List<String> row : rows.subList(1, rows.size())) {
+            String id = row.get(header.indexOf("patient_id")), subject = row.get(header.indexOf("subject_id"));
+            String brats = row.get(header.indexOf("brats_id"));
+            if (!id.matches("100[0-9]{3}") || !subject.equals(id + "A") || id.equals("100414")
+                || !row.get(header.indexOf("scan_letter")).equals("A")
+                || !row.get(header.indexOf("prior_craniotomy_biopsy_resection")).equals("No")
+                || !brats.matches("BraTS-MET-[0-9]{5}-000"))
+                throw new IOException("Ineligible cohort row: " + row);
+            if (!ids.add(id) || !subjects.add(subject) || !bratsIds.add(brats)) throw new IOException("Duplicate patient, examination or BraTS ID: " + row);
+            patients.add(new Patient(id, subject, brats));
         }
-        String escaped = s.replace("\"", "\"\"");
-        return "\"" + escaped + "\"";
+        if (patients.size() != EXPECTED_CASES) throw new IOException("Expected 222 cohort rows; found " + patients.size());
+        patients.sort(Comparator.comparing(Patient::subject));
+        return patients;
     }
 
-    private static void writeDatasetJson(Path datasetJson, int numTraining) throws IOException {
-        // Minimal nnU-Net v2 dataset metadata for the 2-channel configuration (FLAIR, T1post).
-        String json = "{\n"
-            + "  \"channel_names\": {\n"
-            + "    \"0\": \"FLAIR\",\n"
-            + "    \"1\": \"T1post\"\n"
-            + "  },\n"
-            + "  \"labels\": {\n"
-            + "    \"background\": 0,\n"
-            + "    \"tumor_core\": 1,\n"
-            + "    \"edema\": 2\n"
-            + "  },\n"
-            + "  \"numTraining\": " + numTraining + ",\n"
-            + "  \"file_ending\": \".nii.gz\"\n"
-            + "}\n";
-        Files.writeString(datasetJson, json);
+    private static void validateTarget(Path target, List<Copy> copies, List<List<String>> mapping) throws IOException {
+        Set<Path> expected = new HashSet<>();
+        for (Copy copy : copies) expected.add(copy.target());
+        boolean hasOutput = false;
+        for (String name : List.of("imagesTr", "labelsTr")) {
+            Path dir = target.resolve(name);
+            if (Files.isSymbolicLink(dir)) throw new IOException("Output directory must not be a symlink: " + dir);
+            if (Files.exists(dir)) {
+                try (var entries = Files.list(dir)) {
+                    for (Path p : entries.toList()) {
+                        hasOutput = true;
+                        if (!expected.contains(p) || !Files.isRegularFile(p) || Files.isSymbolicLink(p))
+                            throw new IOException("Unexpected output entry; nothing deleted: " + p);
+                    }
+                }
+            }
+        }
+        Path map = target.resolve("renaming_map.csv"), json = target.resolve("dataset.json");
+        if (Files.isSymbolicLink(map) || Files.isSymbolicLink(json)) throw new IOException("Generated metadata must not be symlinks.");
+        if (Files.exists(map)) {
+            if (!readCsv(map).equals(mapping)) throw new IOException("Existing renaming_map.csv conflicts with the planned cohort or source paths.");
+        } else if (hasOutput || Files.exists(json)) throw new IOException("Existing outputs have no identity mapping; use a clean target.");
+        if (Files.exists(json) && !Files.readString(json).replaceAll("\\s", "").equals(DATASET_JSON.replaceAll("\\s", "")))
+            throw new IOException("Existing dataset.json conflicts with this formatter's metadata.");
+        for (Copy copy : copies) if (Files.exists(copy.target()) && Files.mismatch(copy.source(), copy.target()) != -1)
+            throw new IOException("Existing output differs from source; refusing overwrite: " + copy.target());
+    }
+
+    // Strict CSV reader: quoted fields, escaped quotes, embedded newlines, CRLF and UTF-8 BOM.
+    private static List<List<String>> readCsv(Path path) throws IOException {
+        String text = Files.readString(path);
+        if (text.startsWith("\uFEFF")) text = text.substring(1);
+        List<List<String>> rows = new ArrayList<>();
+        List<String> row = new ArrayList<>();
+        StringBuilder field = new StringBuilder();
+        boolean quoted = false, closed = false;
+        for (int i = 0; i < text.length(); i++) {
+            char c = text.charAt(i);
+            if (quoted) {
+                if (c == '"') {
+                    if (i + 1 < text.length() && text.charAt(i + 1) == '"') { field.append('"'); i++; }
+                    else { quoted = false; closed = true; }
+                } else field.append(c);
+            } else if (c == ',' || c == '\n' || c == '\r') {
+                row.add(field.toString()); field.setLength(0); closed = false;
+                if (c != ',') {
+                    if (c == '\r' && i + 1 < text.length() && text.charAt(i + 1) == '\n') i++;
+                    rows.add(row); row = new ArrayList<>();
+                }
+            } else if (c == '"' && field.length() == 0 && !closed) quoted = true;
+            else {
+                if (closed || c == '"') throw new IOException("Malformed CSV quoting: " + path);
+                field.append(c);
+            }
+        }
+        if (quoted) throw new IOException("Unterminated CSV quote: " + path);
+        if (field.length() > 0 || closed || !row.isEmpty()) { row.add(field.toString()); rows.add(row); }
+        if (rows.isEmpty()) throw new IOException("Empty CSV: " + path);
+        if (new HashSet<>(rows.get(0)).size() != rows.get(0).size()) throw new IOException("Duplicate CSV headers: " + path);
+        for (List<String> r : rows) if (r.size() != rows.get(0).size()) throw new IOException("Wrong CSV field count: " + path);
+        return rows;
+    }
+
+    private static String toCsv(List<List<String>> rows) {
+        StringBuilder text = new StringBuilder();
+        for (List<String> row : rows) {
+            List<String> fields = new ArrayList<>();
+            for (String field : row) fields.add("\"" + field.replace("\"", "\"\"") + "\"");
+            text.append(String.join(",", fields)).append('\n');
+        }
+        return text.toString();
+    }
+
+    private static void writeAtomic(Path target, String text) throws IOException {
+        Path tmp = Files.createTempFile(target.getParent(), ".reformat-metadata-", ".tmp");
+        try {
+            Files.writeString(tmp, text);
+            Files.move(tmp, target, StandardCopyOption.REPLACE_EXISTING, StandardCopyOption.ATOMIC_MOVE);
+        } finally { Files.deleteIfExists(tmp); }
     }
 }
