@@ -1,0 +1,48 @@
+Bootstrap: docker
+From: pytorch/pytorch:2.4.1-cuda12.1-cudnn9-runtime
+
+%files
+    nnunetv2 /opt/nnunet/nnunetv2
+    pyproject.toml /opt/nnunet/pyproject.toml
+    setup.py /opt/nnunet/setup.py
+    readme.md /opt/nnunet/readme.md
+    LICENSE /opt/nnunet/LICENSE
+
+%environment
+    export PYTHONDONTWRITEBYTECODE=1
+    export PYTHONUNBUFFERED=1
+    export PIP_NO_CACHE_DIR=1
+    export nnUNet_raw=/workspace/nnunet_data/nnUNet_raw
+    export nnUNet_preprocessed=/workspace/nnunet_data/nnUNet_preprocessed
+    export nnUNet_results=/workspace/nnunet_data/nnUNet_results
+
+%post
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update
+    apt-get install -y --no-install-recommends \
+        git \
+        ca-certificates \
+        libglib2.0-0 \
+        libsm6 \
+        libxext6 \
+        libxrender1 \
+        build-essential \
+        gcc \
+        g++
+    rm -rf /var/lib/apt/lists/*
+
+    cd /opt/nnunet
+    python -m pip install --upgrade pip setuptools wheel
+    python -m pip install -e .
+
+    mkdir -p /workspace
+
+%runscript
+    cd /workspace
+    if [ "$#" -gt 0 ]; then
+        exec /bin/bash -lc "$*"
+    fi
+    exec /bin/bash -lc "python -c \"import torch; print('CUDA:', torch.cuda.is_available(), 'GPUs:', torch.cuda.device_count())\""
+
+%test
+    python -c "import torch, nnunetv2; print('CUDA:', torch.cuda.is_available(), 'GPUs:', torch.cuda.device_count())"
