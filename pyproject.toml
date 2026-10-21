@@ -31,6 +31,7 @@ keywords = [
 ]
 dependencies = [
     "torch>=2.1.2,!=2.9.*",
+    "PyYAML",
     "wandb",
     "acvl-utils>=0.2.3,<0.3",  # 0.3 may bring breaking changes. Careful!
     "dynamic-network-architectures>=0.4.1,<0.5",
@@ -84,6 +85,7 @@ nnUNetv2_convert_MSD_dataset = "nnunetv2.dataset_conversion.convert_MSD_dataset:
 
 [project.optional-dependencies]
 dev = [
+    "pytest",
     "black",
     "ruff",
     "pre-commit"
@@ -92,6 +94,9 @@ dev = [
 [build-system]
 requires = ["setuptools>=67.8.0"]
 build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+include = ["nnunetv2*"]
 
 [tool.codespell]
 skip = '.git,*.pdf,*.svg'

@@ -1,0 +1,10 @@
+# Shared settings for nnUNetTrainerCCDiceCE and nnUNetTrainerGlobalCCDiceCE.
+# The -tr name selects the objective; omit loss_type so both use this file.
+# These match the current root train_config.yaml optimization settings.
+optimizer: AdamW
+initial_lr: 0.0002
+weight_decay: 0.0003
+num_epochs: 300
+dropout_p: 0.3
+region_weights: null
+experiment_name: null

@@ -251,6 +251,129 @@ docker run --runtime=nvidia -it --rm --shm-size=32g \
 
 ---
 
+### Option G: Two-Label CC-DiceCE Training (Individual-Lesion Emphasis)
+
+This checkout provides two project-specific, three-class adaptations of Learning-to-Look-Closer:
+
+- `nnUNetTrainerCCDiceCE`: component-wise Dice+CE for tumor core and edema, averaged equally.
+- `nnUNetTrainerGlobalCCDiceCE`: the identical component loss plus global three-class Dice+CE.
+
+Both trainers require a **3D, mutually exclusive label dataset** with exactly `background: 0`, `tumor_core: 1`, and `edema: 2`. They are not compatible with the currently saved Dataset001 WT/TC/ET region metadata. Use the newly generated three-class dataset only after verifying its `dataset.json`, masks, and preprocessing. The examples below use dataset ID `3`; change it if the verified three-class dataset has a different ID.
+
+The trainers require an NVIDIA CUDA GPU and CuPy. The current base `nnunet-rain` Docker image does not install CuPy. Build a derived CUDA 12 image once:
+
+```bash
+docker build -t nnunet-rain-cc - <<'EOF'
+FROM nnunet-rain
+RUN python -m pip install cupy-cuda12x pytest
+EOF
+```
+
+Do not install both `cupy` and `cupy-cuda12x` in the same image. The base image currently uses CUDA 12.1, so `cupy-cuda12x` is the appropriate package family. Rebuild this derived image whenever the base image changes CUDA major versions.
+
+#### Step 1: Verify the container and run the CUDA acceptance checks
+
+Mount this checkout so the container uses the newly added trainers and tests:
+
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    -w /opt/nnunet \
+    nnunet-rain-cc \
+    "python -c 'import torch, cupy, nnunetv2; print(torch.__version__, torch.version.cuda, cupy.__version__, nnunetv2.__path__)' && \
+     python -m pytest nnunetv2/tests/test_cc_cuda.py -q -s"
+```
+
+The two-GPU DDP checks run only when two GPUs are visible. Do not begin a long training run until this suite passes. For a loss-only timing/memory check at the actual patch size, add `-e CC_BENCH_SHAPE=160,192,160` and run the same test with `-k profile`; replace the dimensions with those in the selected plan.
+
+#### Step 2: Use the shared matched configuration
+
+Both trainers must use the same configuration file so the trainer objective is the only planned loss difference:
+
+```text
+/opt/nnunet/configs/cc_multiclass.yaml
+```
+
+It selects AdamW, learning rate `2e-4`, weight decay `3e-4`, 300 epochs, dropout `0.3`, and no legacy region weights. The trainer name selects CC-only versus GlobalCC; do not set a conflicting `loss_type` in another YAML.
+
+#### Step 3: Train one fold
+
+CC-only:
+
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -e NNUNET_CONFIG_PATH=/opt/nnunet/configs/cc_multiclass.yaml \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    -w /opt/nnunet \
+    nnunet-rain-cc \
+    "nnUNetv2_train 3 3d_fullres 0 -p nnUNetPlans -tr nnUNetTrainerCCDiceCE -num_gpus 2"
+```
+
+The matched global-plus-CC run changes only the trainer name:
+
+```bash
+docker run --runtime=nvidia -it --rm --shm-size=32g \
+    -e NVIDIA_VISIBLE_DEVICES=0,1 \
+    -e CUDA_VISIBLE_DEVICES=0,1 \
+    --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+    -e NNUNET_CONFIG_PATH=/opt/nnunet/configs/cc_multiclass.yaml \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    -w /opt/nnunet \
+    nnunet-rain-cc \
+    "nnUNetv2_train 3 3d_fullres 0 -p nnUNetPlans -tr nnUNetTrainerGlobalCCDiceCE -num_gpus 2"
+```
+
+Replace `nnUNetPlans` with the exact plan name used to preprocess Dataset003 if using a residual-encoder/custom plan. Do not point `-p` at a plan generated only for the old Dataset001 preprocessing.
+
+#### Step 4: Train all five folds sequentially
+
+Run the following loop once for each trainer name. The example below uses GlobalCCDiceCE:
+
+```bash
+for fold in 0 1 2 3 4; do
+    echo "=== Training GlobalCCDiceCE fold $fold using 2 GPUs ==="
+    docker run --runtime=nvidia -it --rm --shm-size=32g \
+        -e NVIDIA_VISIBLE_DEVICES=0,1 \
+        -e CUDA_VISIBLE_DEVICES=0,1 \
+        --env-file /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/.env \
+        -e NNUNET_CONFIG_PATH=/opt/nnunet/configs/cc_multiclass.yaml \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+        -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+        -w /opt/nnunet \
+        nnunet-rain-cc \
+        "nnUNetv2_train 3 3d_fullres $fold -p nnUNetPlans -tr nnUNetTrainerGlobalCCDiceCE -num_gpus 2"
+done
+```
+
+For the CC-only comparison, replace `nnUNetTrainerGlobalCCDiceCE` with `nnUNetTrainerCCDiceCE` and keep every other setting unchanged. The two trainer names create separate result directories. Each initialized run also saves `cc_loss_config.json` in its fold folder.
+
+#### Resume or predict
+
+Resume with the identical trainer, dataset, plan, YAML, and GPU count by appending `--c` to the corresponding training command. Prediction does not calculate CC geometry and therefore does not require CuPy, but the custom trainer source must remain importable:
+
+```bash
+docker run --gpus all -it --rm \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain/nnUnet_dataset:/workspace/nnunet_data \
+    -v /mnt/local/data/rainsun/metastases/IDIA-BrainMetastases-main/train/nnUNet_rain:/opt/nnunet \
+    -v /path/to/server/input_scans:/workspace/input \
+    -v /path/to/server/output_predictions:/workspace/output \
+    -w /opt/nnunet \
+    nnunet-rain \
+    "nnUNetv2_predict -i /workspace/input -o /workspace/output -d 3 -c 3d_fullres -f 0 \
+     -p nnUNetPlans -tr nnUNetTrainerGlobalCCDiceCE"
+```
+
+For complete formulas, differences from the original binary implementation, limitations, and validation status, see [the CC-DiceCE integration document](documentation/lossfunctions/proposals/01_cc_dice_ce.md).
+
+---
+
 ## 4. Weights & Biases (W&B) Logging
 
 nnU-Net has a built-in logger that can stream metrics (loss, validation Dice, learning rates, system usage) directly to [wandb.ai](https://wandb.ai) in real time.
