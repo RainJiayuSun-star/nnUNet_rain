@@ -251,6 +251,41 @@ docker run --runtime=nvidia -it --rm --shm-size=32g \
 
 ---
 
+### Option G: Binary whole-metastasis CC training
+
+The current CC experiment trains **two outputs: background and whole metastasis**.
+Whole metastasis includes enhancing and non-enhancing/necrotic tumor, excludes edema,
+and must be trained on a new binary dataset. Preserve Dataset003.
+
+Three matched trainers inherit native nnU-Net optimization (SGD, LR 0.01,
+weight decay 3e-5, momentum 0.99, Nesterov, polynomial decay, 1,000 epochs):
+
+- `nnUNetTrainerDiceCEBaseline`: global Dice+CE, `smooth=0`.
+- `nnUNetTrainerCCDiceCE`: component-wise binary Dice+CE, `smooth=0`.
+- `nnUNetTrainerGlobalCCDiceCE`: global + component Dice+CE, weights 1:1
+  (primary candidate).
+
+These trainers do not read training YAML files or override dropout. Standard
+augmentation and plan-selected architecture, patch size, and batch size are retained.
+Existing configurable trainers elsewhere in this guide are separate experiments.
+
+Follow the [binary CC runbook](documentation/lossfunctions/proposals/01_cc_dice_ce.md)
+for the protected dataset converter, provenance audit, fold transfer, fresh
+planning/preprocessing, CUDA tests, and a real training/validation VRAM smoke test.
+
+After those gates pass, the runbook's `cc_run` helper exposes physical GPU **3**
+as container CUDA device **0**. For example (dataset ID 4 is illustrative):
+
+```bash
+cc_run 'nnUNetv2_train 4 3d_fullres 0 -p nnUNetPlans -tr nnUNetTrainerGlobalCCDiceCE -num_gpus 1'
+```
+
+Compare all three trainers with identical binary data, folds, plans, and budgets.
+Do not resume three-class/AdamW checkpoints. Only resume a matching new binary run.
+The obsolete `configs/cc_multiclass.yaml` has been removed.
+
+---
+
 ## 4. Weights & Biases (W&B) Logging
 
 nnU-Net has a built-in logger that can stream metrics (loss, validation Dice, learning rates, system usage) directly to [wandb.ai](https://wandb.ai) in real time.
