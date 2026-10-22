@@ -63,8 +63,14 @@ def test_vectorized_value_and_gradient_match_explicit():
 
 
 def test_upstream_reduction_parity():
-    default = Path(__file__).resolve().parents[5] / "lossFunctions/ccDice/Learning-to-Look-Closer"
-    upstream = Path(os.environ.get("CC_UPSTREAM_ROOT", default)) / "nnunetv2/training/loss/instance_losses.py"
+    root = os.environ.get("CC_UPSTREAM_ROOT")
+    if root is None:
+        reference = Path("lossFunctions/ccDice/Learning-to-Look-Closer")
+        root = next((parent / reference for parent in Path(__file__).resolve().parents
+                     if (parent / reference).is_dir()), None)
+    if root is None:
+        pytest.skip("Set CC_UPSTREAM_ROOT to the pinned upstream checkout for parity testing.")
+    upstream = Path(root) / "nnunetv2/training/loss/instance_losses.py"
     if not upstream.is_file():
         pytest.skip("Set CC_UPSTREAM_ROOT to the pinned upstream checkout for parity testing.")
     # Execute only the original arithmetic functions, not upstream imports,

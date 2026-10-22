@@ -31,7 +31,14 @@ def test_cuda_trainer_initialization_steps_resume(training_files, monkeypatch, n
     trainer = make_trainer(name, "cuda")
     trainer.initialize()
     assert isinstance(trainer.optimizer, torch.optim.SGD)
-    training_step(trainer)
+    # AMP may skip its first optimizer step while reducing the initial loss
+    # scale. Save only after a real SGD update has populated momentum state.
+    for _ in range(8):
+        training_step(trainer)
+        if trainer.optimizer.state_dict()["state"]:
+            break
+    else:
+        pytest.fail("AMP did not complete an SGD update after 8 synthetic batches")
     trainer.current_epoch = 3
     path = os.path.join(trainer.output_folder, "checkpoint_latest.pth")
     trainer.save_checkpoint(path)
